@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 import sys
 import json
@@ -40,7 +41,8 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text
                     if(message_text=="Hello" or message_text=="Hi"):
                         send_message(sender_id, "87")
-                    send_message(sender_id, "got it")
+                    else
+                        send_message(sender_id, "got it")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
