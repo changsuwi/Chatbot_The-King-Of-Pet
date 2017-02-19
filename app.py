@@ -39,7 +39,11 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    if(message_text=="Hello" or message_text=="Hi" or message_text==u"妳好".encode('utf-8') or message_text==u"你好".encode('utf-8')):
+                    if(message_text=="Hello" or message_text=="Hi"):
+                        send_message(sender_id, "87")
+                    elif(message_text==u"妳好".encode('utf-8')):
+                        send_message(sender_id, "87")
+                    elif(message_text==u"你好".encode('utf-8')):
                         send_message(sender_id, "87")
                     else:
                         send_message(sender_id, "got it")
