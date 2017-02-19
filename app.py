@@ -41,9 +41,9 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text
                     if(message_text=="Hello" or message_text=="Hi"):
                         send_message(sender_id, "87")
-                    elif(message_text==u"妳好".encode('utf-8')):
+                    elif(message_text==u"妳好"):
                         send_message(sender_id, "87")
-                    elif(message_text==u"你好".encode('utf-8')):
+                    elif(message_text==u"你好"):
                         send_message(sender_id, "87")
                     else:
                         send_message(sender_id, "got it")
