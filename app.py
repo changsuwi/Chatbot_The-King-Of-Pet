@@ -40,7 +40,7 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text
                     if(message_text=="Hello"):
                         send_message(sender_id, "87")
-                    send_message(sender_id, "got it, thanks!")
+                    send_message(sender_id, "got it")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
