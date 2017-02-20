@@ -2,7 +2,7 @@
 import os
 import sys
 import json
-
+import random
 import requests
 from flask import Flask, request
 
@@ -41,8 +41,16 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text
                     if(message_text=="Hello" or message_text=="Hi" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi"):
                         send_message(sender_id, "wolf")
-                    elif(message_text==u"幹"):
-                        send_message(sender_id, "去你媽的")
+                    elif(message_text==u"幹" or message_text==u"靠杯" or message_text==u"靠北" or message_text==u"87"):
+                        number=random.randint(0, 3)
+                        if(number==0):
+                            send_message(sender_id, "去你媽的")
+                        elif(number==1):
+                            send_message(sender_id, "咬你喔")
+                        elif(number==2):
+                            send_message(sender_id,"咬掉你雞雞")
+                        elif(number==3):
+                            send_message(sender_id,"87人類")
                     else:
                         send_message(sender_id, "got it")
 
