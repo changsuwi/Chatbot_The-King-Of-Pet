@@ -42,7 +42,7 @@ def webhook():
                     if(message_text=="Hello" or message_text=="Hi" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi"):
                         send_message(sender_id, "wolf")
                     elif(message_text==u"幹"):
-                        send_message(sender_id, "87")
+                        send_message(sender_id, "去你媽的")
                     else:
                         send_message(sender_id, "got it")
 
