@@ -40,8 +40,8 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
                     print(sender_id)
-                    if(message_text=="Hello" or message_text=="Hi" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi"):
-                        send_message(sender_id, "旺旺")
+                    if(message_text=="Hello" or message_text=="Hi" or message_text==u"嗨" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi"):
+                        send_message(sender_id, "汪汪")
                     elif(message_text==u"幹" or message_text==u"靠杯" or message_text==u"靠北" or message_text==u"87"):
                         number=random.randint(0, 3)
                         if(number==0):
