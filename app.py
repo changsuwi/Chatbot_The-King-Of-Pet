@@ -49,7 +49,7 @@ def webhook():
                         elif(number==1):
                             send_message(sender_id, "咬你喔")
                         elif(number==2):
-                            send_message(sender_id,"咬掉你雞雞")
+                            send_message(sender_id,"嗚嗚")
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
