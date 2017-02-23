@@ -54,7 +54,7 @@ def webhook():
                             send_message(sender_id,"87人類")
                     else:
                         send_message(sender_id, "got it")
-                        res=request.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
+                        res=requests.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
                         print res.txt
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
