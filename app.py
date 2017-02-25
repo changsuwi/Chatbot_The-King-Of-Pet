@@ -53,20 +53,7 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
-                        res=requests.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
-<<<<<<< HEAD
-                        print("test")
-                        
-                        soup = BeautifulSoup(res.text,"lxml") 
-                        for item in soup.select(".divAnimalList"):
-                            print item.select("input")[2].get('src')
-                            print item.select("li")[0].text,item.select("li")[1].text,item.select("li")[2].text,item.select("li")[3].text,item.select("li")[5].text
                         send_message(sender_id, "好的")
-=======
-                        soup = BeautifulSoup(res.text,"lxml") 
-                        for item in soup.select(".divAnimalList"):
-                            send_message(sender_id, item.select("li")[0].text)
->>>>>>> parent of 85115b4... 還原
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
