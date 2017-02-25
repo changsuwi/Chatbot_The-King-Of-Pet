@@ -5,7 +5,7 @@ import json
 import random
 import requests
 from flask import Flask, request
-
+from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 
@@ -53,9 +53,10 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
-                        send_message(sender_id, "got it")
-                        #res=requests.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
-                        
+                        res=requests.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
+                        soup = BeautifulSoup(res.text,"lxml") 
+                        for item in soup.select(".divAnimalList"):
+                            send_message(sender_id, item.select("li")[0].text)
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
