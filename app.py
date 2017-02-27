@@ -25,7 +25,7 @@ def verify():
 def webhook():
 
     # endpoint for processing incoming messaging events
-
+    res=requests.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
