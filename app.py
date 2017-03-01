@@ -56,7 +56,7 @@ def webhook():
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".animal_list"):
     #print type(item.select("input")[2].get('src'))
-                            print item.select("p")[0].text,item.select("p")[1].text,item.select("p")[2].text
+                            #print item.select("p")[0].text,item.select("p")[1].text,item.select("p")[2].text
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
