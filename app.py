@@ -7,7 +7,7 @@ import requests
 from flask import Flask, request
 from bs4 import BeautifulSoup
 app = Flask(__name__)
-
+requests.timeout=3000000
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -52,7 +52,7 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
-                        res=requests.get("http://linux.vbird.org/linux_basic/#part1")
+                        res=requests.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
                         print("success")
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".divAnimalList"):
