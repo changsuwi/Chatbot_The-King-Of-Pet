@@ -55,7 +55,6 @@ def webhook():
                         res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal")
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".an"):
-                            #print item.select("input")[0].get('src')
                             print item.select(".area")[0].text
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
