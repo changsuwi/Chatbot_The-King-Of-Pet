@@ -7,7 +7,7 @@ import requests
 from flask import Flask, request
 from bs4 import BeautifulSoup
 app = Flask(__name__)
-requests.timeout=3000000
+
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -54,7 +54,7 @@ def webhook():
                     else:
                         res=requests.get("http://asms.wsn.com.tw/tn/ieland/el_LoseList.aspx")
                         print("success")
-                        soup = BeautifulSoup(res.text,"lxml") 
+                        soup = BeautifulSoup(res.text,"lxml",timeout=100) 
                         for item in soup.select(".divAnimalList"):
                             print item.select("input")[2].get('src')
                             print item.select("li")[0].text,item.select("li")[1].text,item.select("li")[2].text,item.select("li")[3].text,item.select("li")[5].text
