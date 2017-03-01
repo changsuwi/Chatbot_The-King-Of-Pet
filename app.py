@@ -52,13 +52,11 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
-                        res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal",timeout=3000000)
-                        print("success")
+                        res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal")
                         soup = BeautifulSoup(res.text,"lxml") 
-                        for item in soup.select(".divAnimalList"):
-                            print item.select("input")[2].get('src')
-                            print item.select("li")[0].text,item.select("li")[1].text,item.select("li")[2].text,item.select("li")[3].text,item.select("li")[5].text
-                        send_message(sender_id, "好的")
+                        for item in soup.select(".animal_list"):
+    #print type(item.select("input")[2].get('src'))
+                            print item.select("p")[0].text,item.select("p")[1].text,item.select("p")[2].text
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
