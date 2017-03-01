@@ -52,7 +52,7 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
-                        res=requests.get("https://tw.yahoo.com")
+                        res=requests.get("http://linux.vbird.org/linux_basic/#part1")
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".divAnimalList"):
                             print item.select("input")[2].get('src')
