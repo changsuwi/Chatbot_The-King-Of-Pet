@@ -52,7 +52,7 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
-                        res=requests.get("http://www.moi.gov.tw/stat/index.aspx",timeout=3000000)
+                        res=requests.get("http://asms.wsn.com.tw/tn/webClientMain.aspx?Page=0",timeout=3000000)
                         print("success")
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".divAnimalList"):
