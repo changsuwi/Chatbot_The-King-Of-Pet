@@ -51,7 +51,7 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     else:
-                        res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal")
+                        res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area=16&s_kind=%E7%8B%97&s_bodytype=SMALL&num=8&s_color=CHILD&s_color=ALL&s_sex=F")
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".an"):
                              location=item.select(".area")[0].text.encode("utf-8")
@@ -93,7 +93,6 @@ def send_template(recipient_id,location,gender,shelter,item_url,image_url):
                 "elements":[
                      {
                     "title":"寵物",
-                    "item_url":"https://petersfancybrownhats.com",
                     "image_url":image_url,
                     "subtitle":location + '\n' + gender + '\n' + shelter,
                     "buttons":[
