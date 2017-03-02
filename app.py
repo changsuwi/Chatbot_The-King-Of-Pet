@@ -58,7 +58,7 @@ def webhook():
                              location=item.select(".area")[0].text.encode("utf-8")
                              gender=item.select(".gender")[0].text.encode("utf-8")
                              shelter=item.select(".shelters")[0].text.encode("utf-8")
-                             image_url=item.select(".jsdiv")[0].get('src')
+                             image_url=item.select(".img")[0].get('data-original')
                              item_url="https://petersfancybrownhats.com"
                              send_template(sender_id,location,gender,shelter,item_url,image_url)
                              
@@ -95,7 +95,7 @@ def send_template(recipient_id,location,gender,shelter,item_url,image_url):
                      {
                     "title":"寵物",
                     "item_url":"https://petersfancybrownhats.com",
-                    "image_url":"http://animal-adoption.coa.gov.tw/uploads/animal_album/74/mini_72d285db6afe7b671a4bad7c36fe3bcf.jpg",#image_url
+                    "image_url":image_url,
                     "subtitle":location + '\n' + gender + '\n' + shelter,
                     "buttons":[
                          {
