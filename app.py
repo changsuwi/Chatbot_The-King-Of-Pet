@@ -140,41 +140,6 @@ def send_message(recipient_id, message_text):
             "text": message_text
         }
     })
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message":{
-            "attachment":{
-                "type":"template",
-                "payload":{
-                "template_type":"generic",
-                "elements":[
-                     {
-                    "title":"Welcome to Peter\'s Hats",
-                    "item_url":"https://petersfancybrownhats.com",
-                    "image_url":"https://petersfancybrownhats.com/company_image.png",
-                    "subtitle":"We\'ve got the right hat for everyone.",
-                    "buttons":[
-                         {
-                        "type":"web_url",
-                        "url":"https://petersfancybrownhats.com",
-                        "title":"View Website"
-                         },
-                         {
-                            "type":"postback",
-                            "title":"Start Chatting",
-                            "payload":"DEVELOPER_DEFINED_PAYLOAD"
-                          }              
-                        ]
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-        )
-    
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
         log(r.status_code)
