@@ -58,7 +58,7 @@ def webhook():
                              gender=item.select(".gender")[0].text.encode("utf-8")
                              shelter=item.select(".shelters")[0].text.encode("utf-8")
                              image_url=item.select("img")[0].get('data-original')
-                             item_url=item.select(".a").get('herf')
+                             item_url=item.select("a")[0].get('href')
                              send_template(sender_id,location,gender,shelter,item_url,image_url)
                              
                 if messaging_event.get("delivery"):  # delivery confirmation
@@ -94,6 +94,7 @@ def send_template(recipient_id,location,gender,shelter,item_url,image_url):
                      {
                     "title":"寵物",
                     "image_url":image_url,
+                    "item_url":item_url,
                     "subtitle":location + '\n' + gender + '\n' + shelter,
                     "buttons":[
                          {
