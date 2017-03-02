@@ -53,12 +53,11 @@ def webhook():
                     else:
                         res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal")
                         soup = BeautifulSoup(res.text,"lxml") 
-                        send_message(sender_id, "1111")
                         for item in soup.select(".an"):
                              location=item.select(".area")[0].text.encode("utf-8")
                              gender=item.select(".gender")[0].text.encode("utf-8")
                              shelter=item.select(".shelters")[0].text.encode("utf-8")
-                             image_url=item.select(".img")[0].get('data-original')
+                             image_url=item.select("img")[0].get('data-original')
                              item_url="https://petersfancybrownhats.com"
                              send_template(sender_id,location,gender,shelter,item_url,image_url)
                              
