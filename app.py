@@ -50,7 +50,7 @@ def webhook():
                             send_message(sender_id,"嗚嗚")
                         elif(number==3):
                             send_message(sender_id,"87人類")
-                    else:
+                    elif(message_text==u"領養"):
                         res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area=16&s_kind=%E7%8B%97&s_bodytype=SMALL&num=8&s_color=CHILD&s_color=ALL&s_sex=F")
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".an"):
@@ -60,7 +60,9 @@ def webhook():
                              image_url=item.select("img")[0].get('data-original')
                              item_url=item.select("a")[0].get('href')
                              send_template(sender_id,location,gender,shelter,item_url,image_url)
-                             
+                    else:
+                        send_message(sender_id,"好的")
+                        
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
@@ -99,14 +101,9 @@ def send_template(recipient_id,location,gender,shelter,item_url,image_url):
                     "buttons":[
                          {
                         "type":"web_url",
-                        "url":"https://petersfancybrownhats.com",
+                        "url":item_url,
                         "title":"View Website"
-                         },
-                         {
-                            "type":"postback",
-                            "title":"Start Chatting",
-                            "payload":"DEVELOPER_DEFINED_PAYLOAD"
-                          }              
+                         }         
                         ]
                       }
                     ]
