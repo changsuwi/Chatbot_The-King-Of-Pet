@@ -7,7 +7,7 @@ import requests
 from flask import Flask, request
 from bs4 import BeautifulSoup
 app = Flask(__name__)
-
+count=0
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -54,6 +54,7 @@ def webhook():
                     else:
                         res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal")
                         soup = BeautifulSoup(res.text,"lxml") 
+                        count=1;
                         for item in soup.select(".an"):
                             print item.select(".area")[0].text.encode("utf-8")
                                              
@@ -79,14 +80,52 @@ def send_message(recipient_id, message_text):
     headers = {
         "Content-Type": "application/json"
     }
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message": {
-            "text": message_text
-        }
-    })
+    if(count==0):
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message": {
+                "text": message_text
+            }
+        })
+    else:
+        count=0
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message":{
+                "attachment":{
+                  "type":"template",
+                  "payload":{
+                    "template_type":"generic",
+                    "elements":[
+                      {
+                        "title":"Welcome to Peter\'s Hats",
+                        "item_url":"https://petersfancybrownhats.com",
+                        "image_url":"https://petersfancybrownhats.com/company_image.png",
+                        "subtitle":"We\'ve got the right hat for everyone.",
+                        "buttons":[
+                          {
+                            "type":"web_url",
+                            "url":"https://petersfancybrownhats.com",
+                            "title":"View Website"
+                          },
+                          {
+                            "type":"postback",
+                            "title":"Start Chatting",
+                            "payload":"DEVELOPER_DEFINED_PAYLOAD"
+                          }              
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+        )
+    
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
         log(r.status_code)
