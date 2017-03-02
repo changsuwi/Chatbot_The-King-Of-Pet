@@ -54,6 +54,7 @@ def webhook():
                     else:
                         res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal")
                         soup = BeautifulSoup(res.text,"lxml") 
+                        global count
                         count=1;
                         for item in soup.select(".an"):
                             print item.select(".area")[0].text.encode("utf-8")
