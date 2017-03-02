@@ -80,6 +80,7 @@ def send_message(recipient_id, message_text):
     headers = {
         "Content-Type": "application/json"
     }
+    global count
     if(count==0):
         data = json.dumps({
             "recipient": {
