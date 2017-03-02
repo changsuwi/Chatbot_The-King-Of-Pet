@@ -56,6 +56,7 @@ def webhook():
                         soup = BeautifulSoup(res.text,"lxml") 
                         global count
                         count=1;
+                        send_message(sender_id, "1111")
                         for item in soup.select(".an"):
                             print item.select(".area")[0].text.encode("utf-8")
                                              
