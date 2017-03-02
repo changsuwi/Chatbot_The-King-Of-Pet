@@ -60,7 +60,7 @@ def webhook():
                              shelter=item.select(".shelters")[0].text.encode("utf-8")
                              image_url=item.select(".jsdiv")[0].get('src')
                              item_url="https://petersfancybrownhats.com"
-                             send_template(recipient_id,location,gender,shelter,item_url,image_url)
+                             send_template(sender_id,location,gender,shelter,item_url,image_url)
                              
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
