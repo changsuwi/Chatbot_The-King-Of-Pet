@@ -58,7 +58,7 @@ def webhook():
                              gender=item.select(".gender")[0].text.encode("utf-8")
                              shelter=item.select(".shelters")[0].text.encode("utf-8")
                              image_url=item.select("img")[0].get('data-original')
-                             item_url="https://petersfancybrownhats.com"
+                             item_url=item.select(".a").get('herf')
                              send_template(sender_id,location,gender,shelter,item_url,image_url)
                              
                 if messaging_event.get("delivery"):  # delivery confirmation
