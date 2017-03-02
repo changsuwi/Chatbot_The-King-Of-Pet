@@ -95,8 +95,8 @@ def send_template(recipient_id,location,gender,shelter,item_url,image_url):
                      {
                     "title":"寵物",
                     "item_url":"https://petersfancybrownhats.com",
-                    "image_url":image_url,
-                    "subtitle":location + gender + shelter,
+                    "image_url":"http://animal-adoption.coa.gov.tw/uploads/animal_album/74/mini_72d285db6afe7b671a4bad7c36fe3bcf.jpg",#image_url
+                    "subtitle":location + '\n' + gender + '\n' + shelter,
                     "buttons":[
                          {
                         "type":"web_url",
