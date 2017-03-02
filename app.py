@@ -7,7 +7,6 @@ import requests
 from flask import Flask, request
 from bs4 import BeautifulSoup
 app = Flask(__name__)
-count=0
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -54,12 +53,15 @@ def webhook():
                     else:
                         res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal")
                         soup = BeautifulSoup(res.text,"lxml") 
-                        global count
-                        count=1;
                         send_message(sender_id, "1111")
                         for item in soup.select(".an"):
-                            print item.select(".area")[0].text.encode("utf-8")
-                                             
+                             location=item.select(".area")[0].text.encode("utf-8")
+                             gender=item.select(".gender")[0].text.encode("utf-8")
+                             shelter=item.select(".shelters")[0].text.encode("utf-8")
+                             image_url=item.select(".jsdiv")[0].get('src')
+                             item_url="https://petersfancybrownhats.com"
+                             send_template(recipient_id,location,gender,shelter,item_url,image_url)
+                             
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
@@ -71,7 +73,55 @@ def webhook():
 
     return "ok", 200
 
+def send_template(recipient_id,location,gender,shelter,item_url,image_url):
+    log("sending  to {recipient}".format(recipient=recipient_id))
 
+    params = {
+        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message":{
+            "attachment":{
+                "type":"template",
+                "payload":{
+                "template_type":"generic",
+                "elements":[
+                     {
+                    "title":"寵物",
+                    "item_url":"https://petersfancybrownhats.com",
+                    "image_url":image_url,
+                    "subtitle":location + gender + shelter,
+                    "buttons":[
+                         {
+                        "type":"web_url",
+                        "url":"https://petersfancybrownhats.com",
+                        "title":"View Website"
+                         },
+                         {
+                            "type":"postback",
+                            "title":"Start Chatting",
+                            "payload":"DEVELOPER_DEFINED_PAYLOAD"
+                          }              
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+        )
+    
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+    if r.status_code != 200:
+        log(r.status_code)
+        log(r.text)
+        
 def send_message(recipient_id, message_text):
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
@@ -82,40 +132,36 @@ def send_message(recipient_id, message_text):
     headers = {
         "Content-Type": "application/json"
     }
-    global count
-    if(count==0):
-        data = json.dumps({
-            "recipient": {
-                "id": recipient_id
-            },
-            "message": {
-                "text": message_text
-            }
-        })
-    else:
-        count=0
-        data = json.dumps({
-            "recipient": {
-                "id": recipient_id
-            },
-            "message":{
-                "attachment":{
-                  "type":"template",
-                  "payload":{
-                    "template_type":"generic",
-                    "elements":[
-                      {
-                        "title":"Welcome to Peter\'s Hats",
-                        "item_url":"https://petersfancybrownhats.com",
-                        "image_url":"https://petersfancybrownhats.com/company_image.png",
-                        "subtitle":"We\'ve got the right hat for everyone.",
-                        "buttons":[
-                          {
-                            "type":"web_url",
-                            "url":"https://petersfancybrownhats.com",
-                            "title":"View Website"
-                          },
-                          {
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "text": message_text
+        }
+    })
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message":{
+            "attachment":{
+                "type":"template",
+                "payload":{
+                "template_type":"generic",
+                "elements":[
+                     {
+                    "title":"Welcome to Peter\'s Hats",
+                    "item_url":"https://petersfancybrownhats.com",
+                    "image_url":"https://petersfancybrownhats.com/company_image.png",
+                    "subtitle":"We\'ve got the right hat for everyone.",
+                    "buttons":[
+                         {
+                        "type":"web_url",
+                        "url":"https://petersfancybrownhats.com",
+                        "title":"View Website"
+                         },
+                         {
                             "type":"postback",
                             "title":"Start Chatting",
                             "payload":"DEVELOPER_DEFINED_PAYLOAD"
