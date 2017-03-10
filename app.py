@@ -56,7 +56,7 @@ def webhook():
                     elif(message_text==u"領養"):
                         template = {
                                 "recipient": {
-                                        "id": recipient_id
+                                        "id": sender_id
                                         },
                                         "message":{
                                                 "attachment":{
@@ -79,7 +79,7 @@ def webhook():
                              image_url=item.select("img")[0].get('data-original')
                              item_url=item.select("a")[0].get('href')
                              template=add_template(template,location,gender,shelter,item_url,image_url)
-                        send_template(template,recipient_id,location,gender,shelter,item_url,image_url)
+                        send_template(template,sender_id,location,gender,shelter,item_url,image_url)
                     else:
                         send_message(sender_id,"好的")
                         
