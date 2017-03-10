@@ -21,6 +21,9 @@ def verify():
 
 
 @app.route('/', methods=['POST'])
+
+
+            
 def webhook():
 
     # endpoint for processing incoming messaging events
@@ -51,6 +54,22 @@ def webhook():
                         elif(number==3):
                             send_message(sender_id,"87人類")
                     elif(message_text==u"領養"):
+                        template = {
+                                "recipient": {
+                                        "id": recipient_id
+                                        },
+                                        "message":{
+                                                "attachment":{
+                                                        "type":"template",
+                                                        "payload":{
+                                                                "template_type":"generic",
+                                                                "elements":[
+                                                                        ]
+                                                                }
+                                                        
+                                            }
+                                }
+                        } 
                         res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area=16&s_kind=%E7%8B%97&s_bodytype=SMALL&num=8&s_color=CHILD&s_color=ALL&s_sex=F")
                         soup = BeautifulSoup(res.text,"lxml") 
                         for item in soup.select(".an"):
@@ -59,7 +78,8 @@ def webhook():
                              shelter=item.select(".shelters")[0].text.encode("utf-8")
                              image_url=item.select("img")[0].get('data-original')
                              item_url=item.select("a")[0].get('href')
-                             send_template(sender_id,location,gender,shelter,item_url,image_url)
+                             template=add_template(template,location,gender,shelter,item_url,image_url)
+                        send_template(template,recipient_id,location,gender,shelter,item_url,image_url)
                     else:
                         send_message(sender_id,"好的")
                         
@@ -73,8 +93,29 @@ def webhook():
                     pass
 
     return "ok", 200
+def add_template(template,location,gender,shelter,item_url,image_url):
+    bobble={
+        "title":"寵物",
+        "image_url":image_url,
+        "subtitle":location + '\n' + gender+ '\n' + shelter,
+        "buttons":
+            [
+                    {
+                        "type":item_url,
+                        "url":item_url,
+                        "title":"View Website"
+                    },
+                    {
+                        "type":"postback",
+                        "title":"Start Chatting",
+                        "payload":"DEVELOPER_DEFINED_PAYLOAD"
+                    }              
+            ]    
+        } 
+    template["message"]["attachment"]["payload"]["elements"].append(bobble)
+    return template
 
-def send_template(recipient_id,location,gender,shelter,item_url,image_url):
+def send_template(template,recipient_id,location,gender,shelter,item_url,image_url):
     log("sending  to {recipient}".format(recipient=recipient_id))
 
     params = {
@@ -83,36 +124,7 @@ def send_template(recipient_id,location,gender,shelter,item_url,image_url):
     headers = {
         "Content-Type": "application/json"
     }
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message":{
-            "attachment":{
-                "type":"template",
-                "payload":{
-                "template_type":"generic",
-                "elements":[
-                     {
-                    "title":"寵物",
-                    "image_url":image_url,
-                    "item_url":item_url,
-                    "subtitle":location + '\n' + gender + '\n' + shelter,
-                    "buttons":[
-                         {
-                        "type":"web_url",
-                        "url":item_url,
-                        "title":"View Website"
-                         }         
-                        ]
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-        )
-    
+    data = json.dumps(template)
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     if r.status_code != 200:
         log(r.status_code)
