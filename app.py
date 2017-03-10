@@ -104,12 +104,7 @@ def add_template(template,location,gender,shelter,item_url,image_url):
                         "type":"web_url",
                         "url":item_url,
                         "title":"View Website"
-                    },
-                    {
-                        "type":"postback",
-                        "title":"Start Chatting",
-                        "payload":"DEVELOPER_DEFINED_PAYLOAD"
-                    }              
+                    }
             ]    
         } 
     template["message"]["attachment"]["payload"]["elements"].append(bobble)
