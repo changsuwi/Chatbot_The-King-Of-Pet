@@ -54,8 +54,10 @@ def webhook():
                             json_message(sender_id,"嗚嗚")
                         elif(number==3):
                             json_message(sender_id,"87人類")
+                    
                     elif(message_text==u"領養資訊搜尋"):
-                        crawler(sender_id);
+                        typingon_json(sender_id)
+                        crawler(sender_id)
                         
                     else:
                         json_message(sender_id,"好的")
@@ -71,6 +73,18 @@ def webhook():
 
     return "ok", 200
 
+def typingon_json(recipient_id): 
+    
+    #construct typing on json 
+    
+    data = {
+            "recipient":{
+                    "id": recipient_id
+                    },
+            "sender_action":"typing_on"}
+            
+    sendtofb(data)
+    
 def crawler(sender_id):
     # the animal adoption imformation is crawlered by  http://animal-adoption.coa.gov.tw
     # this function construct a main template and start to crawler
