@@ -77,7 +77,7 @@ def typingon_json(recipient_id):
     
     #construct typing on json 
     log("sending  typingon to {recipient}".format(recipient=recipient_id))
-    data = json.dump({
+    data = json.dumps({
             "recipient":{
                     "id": recipient_id
                     },
