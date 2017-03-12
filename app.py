@@ -77,11 +77,11 @@ def typingon_json(recipient_id):
     
     #construct typing on json 
     log("sending  typingon to {recipient}".format(recipient=recipient_id))
-    data = {
+    data = json.dump({
             "recipient":{
                     "id": recipient_id
                     },
-            "sender_action":"typing_on"}
+            "sender_action":"typing_on"})
             
     sendtofb(data)
     
