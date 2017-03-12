@@ -76,7 +76,7 @@ def webhook():
 def typingon_json(recipient_id): 
     
     #construct typing on json 
-    
+    log("sending  typingon to {recipient}".format(recipient=recipient_id))
     data = {
             "recipient":{
                     "id": recipient_id
