@@ -54,7 +54,7 @@ def webhook():
                             send_message(sender_id,"嗚嗚")
                         elif(number==3):
                             send_message(sender_id,"87人類")
-                    elif(message_text==u"領養"):
+                    elif(message_text==u"領養資訊搜尋"):
                         template = {
                                 "recipient": {
                                         "id": sender_id
