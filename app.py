@@ -43,6 +43,7 @@ def webhook():
                     print(sender_id)
                     if(message_text=="Hello" or message_text=="Hi" or message_text==u"嗨" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi"):
                         send_message(sender_id, "汪汪")
+                        send_mainbutton(sender_id)
                     elif(message_text==u"幹" or message_text==u"靠杯" or message_text==u"靠北" or message_text==u"87"):
                         number=random.randint(0, 3)
                         if(number==0):
@@ -124,7 +125,46 @@ def send_template(template,recipient_id,location,gender,shelter,item_url,image_u
     if r.status_code != 200:
         log(r.status_code)
         log(r.text)
-        
+def send_mainbutton(recipient_id):
+    log("sending message to {recipient}: {text}".format(recipient=recipient_id))
+
+    params = {
+        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    
+    data=json.dumps(
+            {"recipient":{
+    "id": recipient_id
+    },
+    "message":{
+    "text":"汪汪，我是聊天機器狗汪汪，我很聰明的，我可以做很多事:",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"聊天",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHAT"
+      },
+      {
+        "content_type":"text",
+        "title":"可愛寵物影片推播",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_MOVIE"
+      },
+      {
+        "content_type":"text",
+        "title":"領養資訊搜尋",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ADOPTION"
+      }
+    ]
+  }
+    }
+    )
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+    if r.status_code != 200:
+        log(r.status_code)
+        log(r.text)       
 def send_message(recipient_id, message_text):
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
