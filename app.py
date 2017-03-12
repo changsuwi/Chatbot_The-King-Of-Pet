@@ -126,7 +126,7 @@ def send_template(template,recipient_id,location,gender,shelter,item_url,image_u
         log(r.status_code)
         log(r.text)
 def send_mainbutton(recipient_id):
-    log("sending message to {recipient}: {text}".format(recipient=recipient_id))
+    log("sending message to {recipient}".format(recipient=recipient_id))
 
     params = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
