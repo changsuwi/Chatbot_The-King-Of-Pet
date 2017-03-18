@@ -61,7 +61,7 @@ def webhook():
                         ###crawler(sender_id)
                     elif(message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
                         typingon_json(sender_id)
-                        bodytype=messaging_event["message"]["quick_reply"]["quick_reply"]
+                        bodytype=messaging_event["message"]["quick_reply"]["payload"]
                         crawler(sender_id,bodytype)
                     else:
                         json_message(sender_id,"好的")
