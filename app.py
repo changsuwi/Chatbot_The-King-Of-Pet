@@ -57,8 +57,12 @@ def webhook():
                     
                     elif(message_text==u"領養資訊搜尋"):
                         json_searchlocation(sender_id)
+                    
+                    elif(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
+                        payload=messaging_event["message"]["quick_reply"]["payload"]
+                        json_chooselocation(sender_id,payload)
                         
-                    elif(message_text==u"台北市" or message_text==u"新北市"): #之後補
+                    elif(u"縣" in message_text or u"市" in message_text): #之後補
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         json_searchdogcat(sender_id,payload)
                         
@@ -191,22 +195,179 @@ def json_searchlocation(recipient_id):
     "message":{
     "text":"請選擇地區:",
     "quick_replies":[
-      {
-        "content_type":"text",
-        "title":"台北市",
-        "payload":"2 "
-      },
-      {
-        "content_type":"text",
-        "title":"新北市",
-        "payload":"3 "
-      }
-    ]
-  }
+            {
+                    "content_type":"text",
+                    "title":"北部地區",
+                    "payload":"1"
+            },
+            {
+                    "content_type":"text",
+                    "title":"中部地區",
+                    "payload":"2"
+            },
+            {
+                    "content_type":"text",
+                    "title":"南部地區",
+                    "payload":"3"
+            },
+            {
+                    "content_type":"text",
+                    "title":"東部地區",
+                    "payload":"4"
+            }
+        ]
+    
+    }
     }
     )
     sendtofb(data)
-
+def json_chooselocation(recipient_id,count):
+    log("sending chooselocation to {recipient}".format(recipient=recipient_id))
+    if(count==1):
+        data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇地區:",
+                        "quick_replies":[
+                          {
+                            "content_type":"text",
+                            "title":"台北市",
+                            "payload":"2 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"新北市",
+                            "payload":"3 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"基隆市",
+                            "payload":"4 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"桃園市",
+                            "payload":"6 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"新竹縣",
+                            "payload":"7 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"新竹市",
+                            "payload":"8 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"苗栗縣",
+                            "payload":"9 "
+                          }
+                           ]
+                        }
+                }
+            )
+    elif(count==2):
+       data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇地區:",
+                        "quick_replies":[
+                        {
+                            "content_type":"text",
+                            "title":"台中市",
+                            "payload":"10 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"彰化縣",
+                            "payload":"11 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"南投縣",
+                            "payload":"12 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"雲林縣",
+                            "payload":"13 "
+                          }
+                                  ]
+                        }
+                    }
+                )
+    elif(count==3):
+       data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇地區:",
+                        "quick_replies":[
+                         {
+                            "content_type":"text",
+                            "title":"嘉義縣",
+                            "payload":"14 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"嘉義市",
+                            "payload":"15 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"台南市",
+                            "payload":"16 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"高雄市",
+                            "payload":"17 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"屏東縣",
+                            "payload":"18 "
+                          }
+                                  ]
+                        }
+                    }
+                )
+    else:
+        data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇地區:",
+                        "quick_replies":[
+                         {
+                            "content_type":"text",
+                            "title":"宜蘭縣",
+                            "payload":"5 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"花蓮縣",
+                            "payload":"19 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"台東縣",
+                            "payload":"20 "
+                          }
+                                  ]
+                        }
+                    }
+                )
+    sendtofb(data)
+    
 def json_searchdogcat(recipient_id,payload):
     log("sending searchdogact to {recipient}".format(recipient=recipient_id))
     data=json.dumps(
