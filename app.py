@@ -67,11 +67,11 @@ def webhook():
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         json_searchdogcat(sender_id,payload)
                         
-                    elif(message_text==u"狗" or message_text==u"貓"): #之後補
+                    elif(message_text==u"全部種類" or message_text==u"狗" or message_text==u"貓"): #之後補
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         json_searchbodytype(sender_id,payload)
                         
-                    elif(message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
+                    elif(message_text==u"全部體型" or message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
                         typingon_json(sender_id)
                         searchlist=messaging_event["message"]["quick_reply"]["payload"]
                         crawler(sender_id,searchlist)
@@ -231,7 +231,7 @@ def json_chooselocation(recipient_id,count):
                     "id": recipient_id
                     },
                 "message":{
-                        "text":"請選擇地區:",
+                        "text":"請選擇縣市:",
                         "quick_replies":[
                           {
                             "content_type":"text",
@@ -278,7 +278,7 @@ def json_chooselocation(recipient_id,count):
                     "id": recipient_id
                     },
                 "message":{
-                        "text":"請選擇地區:",
+                        "text":"請選擇縣市:",
                         "quick_replies":[
                         {
                             "content_type":"text",
@@ -310,7 +310,7 @@ def json_chooselocation(recipient_id,count):
                     "id": recipient_id
                     },
                 "message":{
-                        "text":"請選擇地區:",
+                        "text":"請選擇縣市:",
                         "quick_replies":[
                          {
                             "content_type":"text",
@@ -347,7 +347,7 @@ def json_chooselocation(recipient_id,count):
                     "id": recipient_id
                     },
                 "message":{
-                        "text":"請選擇地區:",
+                        "text":"請選擇縣市:",
                         "quick_replies":[
                          {
                             "content_type":"text",
@@ -381,7 +381,7 @@ def json_searchdogcat(recipient_id,payload):
     "quick_replies":[
       {
         "content_type":"text",
-        "title":"全部",
+        "title":"全部種類",
         "payload":payload + "ALL "
       },
       {
@@ -415,7 +415,7 @@ def json_searchbodytype(recipient_id,payload):
     "quick_replies":[
       {
         "content_type":"text",
-        "title":"全部",
+        "title":"全部體型",
         "payload":payload+"ALL "
       },
       {
