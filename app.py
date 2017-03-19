@@ -117,7 +117,7 @@ def crawler(sender_id,searchlist):
                                 }
                 } 
     # start to crawler
-    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0],kind=search[1],bodytype=search[2]))
+    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0],kind=search[1],bodytype=unicode(search[2])))
     soup = BeautifulSoup(res.text,"lxml") 
     for item in soup.select(".an"):
         location=item.select(".area")[0].text.encode("utf-8")
