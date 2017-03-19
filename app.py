@@ -60,11 +60,11 @@ def webhook():
                     
                     elif(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
                         payload=messaging_event["message"]["quick_reply"]["payload"]
+                        print "payload={a}".format(a=payload)
                         json_chooselocation(sender_id,payload)
                         
                     elif(u"縣" in message_text or u"市" in message_text): #之後補
                         payload=messaging_event["message"]["quick_reply"]["payload"]
-                        print "payload={a}".format(a=payload)
                         json_searchdogcat(sender_id,payload)
                         
                     elif(message_text==u"狗" or message_text==u"貓"): #之後補
@@ -224,6 +224,7 @@ def json_searchlocation(recipient_id):
     sendtofb(data)
 def json_chooselocation(recipient_id,count):
     log("sending chooselocation to {recipient}".format(recipient=recipient_id))
+    print "count={a}".format(a=count)
     if(count==1):
         data=json.dumps(
             {"recipient":{
