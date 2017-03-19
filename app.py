@@ -63,6 +63,7 @@ def webhook():
                         json_searchdogcat(sender_id,payload)
                         
                     elif(message_text==u"狗" or message_text==u"貓"): #之後補
+                        payload=messaging_event["message"]["quick_reply"]["payload"]
                         json_searchbodytype(sender_id,payload)
                         
                     elif(message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
