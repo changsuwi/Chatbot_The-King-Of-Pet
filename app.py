@@ -64,6 +64,7 @@ def webhook():
                         
                     elif(u"縣" in message_text or u"市" in message_text): #之後補
                         payload=messaging_event["message"]["quick_reply"]["payload"]
+                        print "payload={a}".format(a=payload)
                         json_searchdogcat(sender_id,payload)
                         
                     elif(message_text==u"狗" or message_text==u"貓"): #之後補
