@@ -381,6 +381,11 @@ def json_searchdogcat(recipient_id,payload):
     "quick_replies":[
       {
         "content_type":"text",
+        "title":"全部",
+        "payload":payload + "ALL "
+      },
+      {
+        "content_type":"text",
         "title":"狗",
         "payload":payload + u"狗 "
       },
@@ -408,6 +413,11 @@ def json_searchbodytype(recipient_id,payload):
     "message":{
     "text":"請選擇欲領養寵物的體型:",
     "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"全部",
+        "payload":payload+"ALL "
+      },
       {
         "content_type":"text",
         "title":"迷你型",
