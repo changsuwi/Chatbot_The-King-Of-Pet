@@ -218,17 +218,17 @@ def json_searchdogcat(recipient_id,payload):
       {
         "content_type":"text",
         "title":"狗",
-        "payload":payload+"狗 "
+        "payload":payload + u"狗 "
       },
       {
         "content_type":"text",
         "title":"貓",
-        "payload":payload+"貓 "
+        "payload":payload + u"貓 "
       },
       {
         "content_type":"text",
         "title":"其他 ",
-        "payload":payload+"其他 "
+        "payload":payload + u"其他 "
       }
     ]
   }
