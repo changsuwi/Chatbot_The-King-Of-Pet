@@ -225,7 +225,7 @@ def json_searchlocation(recipient_id):
 def json_chooselocation(recipient_id,count):
     log("sending chooselocation to {recipient}".format(recipient=recipient_id))
     print "count={a}".format(a=count)
-    if(count==1):
+    if(count=="1"):
         data=json.dumps(
             {"recipient":{
                     "id": recipient_id
@@ -272,7 +272,7 @@ def json_chooselocation(recipient_id,count):
                         }
                 }
             )
-    elif(count==2):
+    elif(count=="2"):
        data=json.dumps(
             {"recipient":{
                     "id": recipient_id
@@ -304,7 +304,7 @@ def json_chooselocation(recipient_id,count):
                         }
                     }
                 )
-    elif(count==3):
+    elif(count=="3"):
        data=json.dumps(
             {"recipient":{
                     "id": recipient_id
