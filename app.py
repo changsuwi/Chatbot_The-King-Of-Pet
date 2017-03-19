@@ -56,13 +56,19 @@ def webhook():
                             json_message(sender_id,"87人類")
                     
                     elif(message_text==u"領養資訊搜尋"):
-                        json_searchbodytype(sender_id)
-                        ###typingon_json(sender_id)
-                        ###crawler(sender_id)
+                        json_searchlocation(sender_id)
+                        
+                    elif(message_text==u"台北市" or message_text==u"新北市"): #之後補
+                        payload=messaging_event["message"]["quick_reply"]["payload"]
+                        json_searchdogcat(sender_id,payload)
+                        
+                    elif(message_text==u"狗" or message_text==u"貓"): #之後補
+                        json_searchbodytype(sender_id,payload)
+                        
                     elif(message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
                         typingon_json(sender_id)
-                        bodytype=messaging_event["message"]["quick_reply"]["payload"]
-                        crawler(sender_id,bodytype)
+                        searchlist=messaging_event["message"]["quick_reply"]["payload"]
+                        crawler(sender_id,searchlist)
                     else:
                         json_message(sender_id,"好的")
                         
@@ -89,9 +95,11 @@ def typingon_json(recipient_id):
             
     sendtofb(data)
     
-def crawler(sender_id,bodytype):
+def crawler(sender_id,searchlist):
     # the animal adoption imformation is crawlered by  http://animal-adoption.coa.gov.tw
     # this function construct a main template and start to crawler
+    search=searchlist.split()
+    print search
     template = {
                     "recipient": {
                     "id": sender_id
@@ -108,7 +116,7 @@ def crawler(sender_id,bodytype):
                                 }
                 } 
     # start to crawler
-    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area=16&s_kind=%E7%8B%97&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(bodytype=bodytype))
+    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0],kind=search[1],bodytype=search[2]))
     soup = BeautifulSoup(res.text,"lxml") 
     for item in soup.select(".an"):
         location=item.select(".area")[0].text.encode("utf-8")
@@ -172,7 +180,62 @@ def json_mainbutton(recipient_id): #construct mainbutton json
     }
     )
     sendtofb(data)
-def json_searchbodytype(recipient_id):
+    
+def json_searchlocation(recipient_id):
+    log("sending searchlocation to {recipient}".format(recipient=recipient_id))
+    data=json.dumps(
+            {"recipient":{
+    "id": recipient_id
+    },
+    "message":{
+    "text":"請選擇地區:",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"台北市",
+        "payload":"2 "
+      },
+      {
+        "content_type":"text",
+        "title":"新北市",
+        "payload":"3 "
+      }
+    ]
+  }
+    }
+    )
+    sendtofb(data)
+
+def json_searchdogcat(recipient_id,payload):
+    log("sending searchdogact to {recipient}".format(recipient=recipient_id))
+    data=json.dumps(
+            {"recipient":{
+    "id": recipient_id
+    },
+    "message":{
+    "text":"請選擇欲領養寵物的類型:",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"狗",
+        "payload":payload+"狗 "
+      },
+      {
+        "content_type":"text",
+        "title":"貓",
+        "payload":payload+"貓 "
+      },
+      {
+        "content_type":"text",
+        "title":"其他 ",
+        "payload":payload+"其他 "
+      }
+    ]
+  }
+    }
+    )
+    sendtofb(data)
+def json_searchbodytype(recipient_id,payload):
     log("sending searchbodytype to {recipient}".format(recipient=recipient_id))
     data=json.dumps(
             {"recipient":{
@@ -184,22 +247,22 @@ def json_searchbodytype(recipient_id):
       {
         "content_type":"text",
         "title":"迷你型",
-        "payload":"MINI"
+        "payload":payload+"MINI "
       },
       {
         "content_type":"text",
         "title":"小型",
-        "payload":"SMALL"
+        "payload":payload+"SMALL "
       },
       {
         "content_type":"text",
         "title":"中型",
-        "payload":"MEDIUM"
+        "payload":payload+"MEDIUM "
       },
       {
         "content_type":"text",
         "title":"大型",
-        "payload":"BIG"
+        "payload":payload+"BIG "
       }
     ]
   }
