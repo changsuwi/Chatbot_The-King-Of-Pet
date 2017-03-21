@@ -122,7 +122,7 @@ def crawler(sender_id,searchlist):
                                 }
                 } 
     # start to crawler
-    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0],kind=search[1].encode('utf-8'),bodytype=search[2]))
+    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=11&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0],kind=search[1].encode('utf-8'),bodytype=search[2]))
     soup = BeautifulSoup(res.text,"lxml") 
     count=0
     for item in soup.select(".an"):
@@ -136,6 +136,7 @@ def crawler(sender_id,searchlist):
     if(count==0):
         json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
         json_message(sender_id,"可以試著放寬搜尋條件喔汪汪")
+        
     else:
         json_template(template,sender_id)
         json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
