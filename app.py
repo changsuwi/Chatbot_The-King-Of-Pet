@@ -65,7 +65,7 @@ def webhook():
                         print "payload={a}".format(a=payload)
                         json_chooselocation(sender_id,payload)
                         
-                    elif(u"縣" in message_text or u"市" in message_text): 
+                    elif(u"縣" in message_text or u"市" in message_text or message_text==u"北北基宜全部" or message_text==u"桃竹苗全部" or message_text==u"中彰投全部" or message_text==u"雲嘉南全部" or message_text==u"高屏全部" or message_text==u"花東全部"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         json_searchdogcat(sender_id,payload)
                         
