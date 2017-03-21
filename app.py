@@ -124,7 +124,7 @@ def crawler(sender_id,searchlist):
                                 }
                 } 
     # start to crawler
-    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=11&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0],kind=search[1].encode('utf-8'),bodytype=search[2]))
+    res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=11&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0].encode('utf-8'),kind=search[1].encode('utf-8'),bodytype=search[2]))
     soup = BeautifulSoup(res.text,"lxml") 
     count=0 #count the number of animal 
     for item in soup.select(".an"):
@@ -348,7 +348,7 @@ def json_chooselocation(recipient_id,count):
                           {
                             "content_type":"text",
                             "title":"高屏全部",
-                            "payload":u"高屏全部 "
+                            "payload":u"高屏 "
                           },
                           {
                             "content_type":"text",
