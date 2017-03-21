@@ -135,8 +135,8 @@ def crawler(sender_id,searchlist):
         template=add_template(template,location,gender,shelter,item_url,image_url) #find new imformation,so add this in the template
     if(count==0):
         json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
-        json_message(sender_id,"可以試著放寬搜尋條件喔汪汪")
-        
+        json_message(sender_id,"可以試著放寬搜尋條件，或是看看是否有人想送養喔汪汪")
+        json_mainbutton(sender_id)
     else:
         json_template(template,sender_id)
         json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
@@ -243,6 +243,16 @@ def json_chooselocation(recipient_id,count):
                         "quick_replies":[
                           {
                             "content_type":"text",
+                            "title":"北北基宜全部",
+                            "payload":u"北北基宜 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"桃竹苗全部",
+                            "payload":u"桃竹苗 "
+                          },
+                          {
+                            "content_type":"text",
                             "title":"台北市",
                             "payload":"2 "
                           },
@@ -290,6 +300,11 @@ def json_chooselocation(recipient_id,count):
                         "quick_replies":[
                         {
                             "content_type":"text",
+                            "title":"中彰投全部",
+                            "payload":u"中彰投 "
+                          },
+                        {
+                            "content_type":"text",
                             "title":"台中市",
                             "payload":"10 "
                           },
@@ -321,6 +336,16 @@ def json_chooselocation(recipient_id,count):
                         "text":"請選擇縣市:",
                         "quick_replies":[
                         {
+                            "content_type":"text",
+                            "title":"雲嘉南全部",
+                            "payload":u"雲嘉南 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"高屏全部",
+                            "payload":u"高屏全部 "
+                          },
+                          {
                             "content_type":"text",
                             "title":"嘉義縣",
                             "payload":"14 "
@@ -357,7 +382,22 @@ def json_chooselocation(recipient_id,count):
                 "message":{
                         "text":"請選擇縣市:",
                         "quick_replies":[
-                         {
+                           {
+                            "content_type":"text",
+                            "title":"北北基宜全部",
+                            "payload":u"北北基宜 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"花東全部",
+                            "payload":u"花東 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"宜蘭縣",
+                            "payload":"5 "
+                          },
+                          {
                             "content_type":"text",
                             "title":"宜蘭縣",
                             "payload":"5 "
@@ -450,7 +490,7 @@ def json_searchbodytype(recipient_id,payload):
   }
     }
     )
-    sendtofb(data)        
+    sendtofb(data)  
 def json_message(recipient_id, message_text): #construct message json
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
