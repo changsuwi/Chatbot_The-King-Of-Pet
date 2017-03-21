@@ -58,22 +58,24 @@ def webhook():
                     elif(message_text==u"領養資訊搜尋"):
                         json_searchlocation(sender_id)
                     
+                    ###use payload to save the data which user send
+                    ###location---> city ---> kind ---> body ---> start crawler
                     elif(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         print "payload={a}".format(a=payload)
                         json_chooselocation(sender_id,payload)
                         
-                    elif(u"縣" in message_text or u"市" in message_text): #之後補
+                    elif(u"縣" in message_text or u"市" in message_text): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         json_searchdogcat(sender_id,payload)
                         
-                    elif(message_text==u"全部種類" or message_text==u"狗" or message_text==u"貓"): #之後補
+                    elif(message_text==u"全部種類" or message_text==u"狗" or message_text==u"貓"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         json_searchbodytype(sender_id,payload)
                         
                     elif(message_text==u"全部體型" or message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
-                        typingon_json(sender_id)
-                        searchlist=messaging_event["message"]["quick_reply"]["payload"]
+                        typingon_json(sender_id) ###輸出... 讓使用者知道要等待
+                        searchlist=messaging_event["message"]["quick_reply"]["payload"] ###get payload
                         crawler(sender_id,searchlist)
                     else:
                         json_message(sender_id,"好的")
@@ -124,7 +126,7 @@ def crawler(sender_id,searchlist):
     # start to crawler
     res=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=11&s_color=CHILD&s_color=ALL&s_sex=F".format(area=search[0],kind=search[1].encode('utf-8'),bodytype=search[2]))
     soup = BeautifulSoup(res.text,"lxml") 
-    count=0
+    count=0 #count the number of animal 
     for item in soup.select(".an"):
         count=count+1;
         location=item.select(".area")[0].text.encode("utf-8")
@@ -133,11 +135,13 @@ def crawler(sender_id,searchlist):
         image_url=item.select("img")[0].get('data-original')
         item_url=item.select("a")[0].get('href')
         template=add_template(template,location,gender,shelter,item_url,image_url) #find new imformation,so add this in the template
-    if(count==0):
+    
+    if(count==0): #if number==0 can not find any animal
         json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
         json_message(sender_id,"可以試著放寬搜尋條件，或是看看是否有人想送養喔汪汪")
         json_mainbutton(sender_id)
-    else:
+    
+    else: #finish the crawler and send data to json_template
         json_template(template,sender_id)
         json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
     
@@ -230,6 +234,7 @@ def json_searchlocation(recipient_id):
     }
     )
     sendtofb(data)
+
 def json_chooselocation(recipient_id,count):
     log("sending chooselocation to {recipient}".format(recipient=recipient_id))
     print "count={a}".format(a=count)
@@ -452,6 +457,7 @@ def json_searchdogcat(recipient_id,payload):
     }
     )
     sendtofb(data)
+
 def json_searchbodytype(recipient_id,payload):
     log("sending searchbodytype to {recipient}".format(recipient=recipient_id))
     data=json.dumps(
@@ -491,6 +497,7 @@ def json_searchbodytype(recipient_id,payload):
     }
     )
     sendtofb(data)  
+
 def json_message(recipient_id, message_text): #construct message json
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
