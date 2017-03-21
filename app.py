@@ -136,8 +136,9 @@ def crawler(sender_id,searchlist):
     if(count==0):
         json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
         json_message(sender_id,"可以試著放寬搜尋條件喔汪汪")
-    json_template(template,sender_id)
-    json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
+    else:
+        json_template(template,sender_id)
+        json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
     
     
 def add_template(template,location,gender,shelter,item_url,image_url):
