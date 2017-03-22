@@ -722,6 +722,7 @@ def json_chooselocation2(recipient_id,payload):
 def crawler2(sender_id,searchlist):
     # the animal adoption imformation is crawlered by  http://animal-adoption.coa.gov.tw
     # this function construct a main template and start to crawler
+    print searchlist
     search=searchlist.split()
     print search
     template = {
