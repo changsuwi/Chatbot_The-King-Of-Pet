@@ -751,7 +751,7 @@ def crawler2(sender_id,searchlist):
         name = item.select(".view-data-node-data-field-pet-name-field-pet-name-value")[0].text.encode("utf-8")
         age = item.select(".view-data-node-data-field-pet-age-field-pet-age-value")[0].text.encode("utf-8")
         look = item.select(".view-data-node-data-field-pet-look-field-pet-look-value")[0].text.encode("utf-8")
-        item_url=item_url=item.select("a")[0].get('href')
+        item_url="http://www.meetpets.org.tw"+item.select("a")[0].get('href')
         image_url=item.select("img")[0].get('src')
         template=add_template2(template,title,country,name,age,look,item_url,image_url) #find new imformation,so add this in the template
         print template
