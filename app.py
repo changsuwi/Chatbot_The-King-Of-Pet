@@ -548,22 +548,22 @@ def json_searchlocation2(recipient_id,payload):
             {
                     "content_type":"text",
                     "title":"北部地區",
-                    "payload":payload+"1"
+                    "payload":payload+"1 "
             },
             {
                     "content_type":"text",
                     "title":"中部地區",
-                    "payload":payload+"2"
+                    "payload":payload+"2 "
             },
             {
                     "content_type":"text",
                     "title":"南部地區",
-                    "payload":payload+"3"
+                    "payload":payload+"3 "
             },
             {
                     "content_type":"text",
                     "title":"東部地區",
-                    "payload":payload+"4"
+                    "payload":payload+"4 "
             }
         ]
     
@@ -574,7 +574,7 @@ def json_searchlocation2(recipient_id,payload):
 def json_chooselocation2(recipient_id,payload):
     log("sending chooselocation2 to {recipient}".format(recipient=recipient_id))
     print "count={a}".format(a=payload[4])
-    if(payload[4]=="1"):
+    if(payload[4]=="1 "):
         data=json.dumps(
             {"recipient":{
                     "id": recipient_id
@@ -621,7 +621,7 @@ def json_chooselocation2(recipient_id,payload):
                         }
                 }
             )
-    elif(payload[4]=="2"):
+    elif(payload[4]=="2 "):
        data=json.dumps(
             {"recipient":{
                     "id": recipient_id
@@ -653,7 +653,7 @@ def json_chooselocation2(recipient_id,payload):
                         }
                     }
                 )
-    elif(payload[4]=="3"):
+    elif(payload[4]=="3 "):
        data=json.dumps(
             {"recipient":{
                     "id": recipient_id
