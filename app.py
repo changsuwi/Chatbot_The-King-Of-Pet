@@ -54,7 +54,7 @@ def webhook():
                             json_message(sender_id,"嗚嗚")
                         elif(number==3):
                             json_message(sender_id,"87人類")
-                    elif(sender_id=="1241168685962318"):
+                    elif(sender_id=="1292572117477231"):
                         json_message(sender_id,"嗚嗚")
                     elif(message_text==u"領養資訊搜尋"):
                         json_searchlocation(sender_id)
