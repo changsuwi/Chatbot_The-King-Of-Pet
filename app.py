@@ -585,37 +585,37 @@ def json_chooselocation2(recipient_id,payload):
                           {
                             "content_type":"text",
                             "title":"台北市",
-                            "payload":payload + "台北市 "
+                            "payload":payload + u"台北市 "
                           },
                           {
                             "content_type":"text",
                             "title":"新北市",
-                            "payload":payload + "新北市 "
+                            "payload":payload + u"新北市 "
                           },
                           {
                             "content_type":"text",
                             "title":"基隆市",
-                            "payload":payload + "基隆市 "
+                            "payload":payload + u"基隆市 "
                           },
                           {
                             "content_type":"text",
                             "title":"桃園市",
-                            "payload":payload + "桃園市 "
+                            "payload":payload + u"桃園市 "
                           },
                           {
                             "content_type":"text",
                             "title":"新竹縣",
-                            "payload":payload + "新竹縣 "
+                            "payload":payload + u"新竹縣 "
                           },
                           {
                             "content_type":"text",
                             "title":"新竹市",
-                            "payload":payload + "新竹市 "
+                            "payload":payload + u"新竹市 "
                           },
                           {
                             "content_type":"text",
                             "title":"苗栗縣",
-                            "payload":payload + "苗栗縣 "
+                            "payload":payload + u"苗栗縣 "
                           }
                            ]
                         }
@@ -632,22 +632,22 @@ def json_chooselocation2(recipient_id,payload):
                         {
                             "content_type":"text",
                             "title":"台中市",
-                            "payload":payload + "台中市 "
+                            "payload":payload + u"台中市 "
                           },
                           {
                             "content_type":"text",
                             "title":"彰化縣",
-                            "payload":payload + "彰化縣 "
+                            "payload":payload + u"彰化縣 "
                           },
                           {
                             "content_type":"text",
                             "title":"南投縣",
-                            "payload":payload + "南投縣 "
+                            "payload":payload + u"南投縣 "
                           },
                           {
                             "content_type":"text",
                             "title":"雲林縣",
-                            "payload":payload + "雲林縣 "
+                            "payload":payload + u"雲林縣 "
                           }
                                   ]
                         }
@@ -664,27 +664,27 @@ def json_chooselocation2(recipient_id,payload):
                           {
                             "content_type":"text",
                             "title":"嘉義縣",
-                            "payload":payload + "嘉義縣 "
+                            "payload":payload + u"嘉義縣 "
                           },
                           {
                             "content_type":"text",
                             "title":"嘉義市",
-                            "payload":payload + "嘉義市 "
+                            "payload":payload + u"嘉義市 "
                           },
                           {
                             "content_type":"text",
                             "title":"台南市",
-                            "payload":payload + "台南市 "
+                            "payload":payload + u"台南市 "
                           },
                           {
                             "content_type":"text",
                             "title":"高雄市",
-                            "payload":payload + "高雄市 "
+                            "payload":payload + u"高雄市 "
                           },
                           {
                             "content_type":"text",
                             "title":"屏東縣",
-                            "payload":payload + "屏東縣 "
+                            "payload":payload + u"屏東縣 "
                           }
                                   ]
                         }
@@ -701,17 +701,17 @@ def json_chooselocation2(recipient_id,payload):
                           {
                             "content_type":"text",
                             "title":"宜蘭縣",
-                            "payload":payload + "宜蘭縣 "
+                            "payload":payload + u"宜蘭縣 "
                           },
                           {
                             "content_type":"text",
                             "title":"花蓮縣",
-                            "payload":payload + "花蓮縣 "
+                            "payload":payload + u"花蓮縣 "
                           },
                           {
                             "content_type":"text",
                             "title":"台東縣",
-                            "payload":payload + "台東縣 "
+                            "payload":payload + u"台東縣 "
                           }
                                   ]
                         }
