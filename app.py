@@ -57,24 +57,33 @@ def webhook():
                     
                     elif(message_text==u"領養資訊搜尋"):
                         json_searchlocation(sender_id)
-                    
+                    elif(message_text==u"民間送養資訊搜尋"):
+                        json_choosedogcat2(sender_id)
                     ###use payload to save the data which user send
                     ###location---> city ---> kind ---> body ---> start crawler
                     elif(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         print "payload={a}".format(a=payload)
-                        json_chooselocation(sender_id,payload)
+                        if(payload=="1 " or payload=="2 " or payload=="3 " or payload=="4 " ):
+                            json_chooselocation(sender_id,payload)
+                        else:
+                            json_chooselocation2(sender_id,payload)
                         
                     elif(u"縣" in message_text or u"市" in message_text or message_text==u"北北基宜全部" or message_text==u"桃竹苗全部" or message_text==u"中彰投全部" or message_text==u"雲嘉南全部" or message_text==u"高屏全部" or message_text==u"花東全部"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
-                        json_searchdogcat(sender_id,payload)
-                        
+                        if(len(payload)<=5):
+                            json_searchdogcat(sender_id,payload)
+                        else:
+                            crawler2(sender_id,payload)
                     elif(message_text==u"全部種類" or message_text==u"狗" or message_text==u"貓"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
-                        json_searchbodytype(sender_id,payload)
+                        if(payload=="dog " or payload=="cat "):
+                            json_searchlocation2(sender_id,payload)
+                        else:
+                            json_searchbodytype(sender_id,payload)
                         
                     elif(message_text==u"全部體型" or message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
-                        typingon_json(sender_id) ###輸出... 讓使用者知道要等待
+                        typingon_json(sender_id) 
                         searchlist=messaging_event["message"]["quick_reply"]["payload"] ###get payload
                         crawler(sender_id,searchlist)
                     else:
@@ -102,7 +111,7 @@ def typingon_json(recipient_id):
             "sender_action":"typing_on"})
             
     sendtofb(data)
-    
+        
 def crawler(sender_id,searchlist):
     # the animal adoption imformation is crawlered by  http://animal-adoption.coa.gov.tw
     # this function construct a main template and start to crawler
@@ -191,6 +200,11 @@ def json_mainbutton(recipient_id): #construct mainbutton json
       {
         "content_type":"text",
         "title":"領養資訊搜尋",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ADOPTION"
+      },
+      {
+        "content_type":"text",
+        "title":"民間送養資訊搜尋",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ADOPTION"
       }
     ]
@@ -497,7 +511,274 @@ def json_searchbodytype(recipient_id,payload):
     }
     )
     sendtofb(data)  
-
+def json_choosedogcat2(recipient_id):
+    log("sending searchdogact2 to {recipient}".format(recipient=recipient_id))
+    data=json.dumps(
+            {"recipient":{
+    "id": recipient_id
+    },
+    "message":{
+    "text":"請選擇欲領養寵物的類型:",
+    "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"狗",
+        "payload":"dog "
+      },
+      {
+        "content_type":"text",
+        "title":"貓",
+        "payload":"cat "
+      }
+    ]
+  }
+    }
+    )
+    sendtofb(data)
+    
+def json_searchlocation2(recipient_id,payload):
+    log("sending searchlocation2 to {recipient}".format(recipient=recipient_id))
+    data=json.dumps(
+            {"recipient":{
+    "id": recipient_id
+    },
+    "message":{
+    "text":"請選擇地區:",
+    "quick_replies":[
+            {
+                    "content_type":"text",
+                    "title":"北部地區",
+                    "payload":payload+"1"
+            },
+            {
+                    "content_type":"text",
+                    "title":"中部地區",
+                    "payload":payload+"2"
+            },
+            {
+                    "content_type":"text",
+                    "title":"南部地區",
+                    "payload":payload+"3"
+            },
+            {
+                    "content_type":"text",
+                    "title":"東部地區",
+                    "payload":payload+"4"
+            }
+        ]
+    
+    }
+    }
+    )
+    sendtofb(data)
+def json_chooselocation2(recipient_id,payload):
+    log("sending chooselocation2 to {recipient}".format(recipient=recipient_id))
+    print "count={a}".format(a=payload[4])
+    if(payload[4]=="1"):
+        data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇縣市:",
+                        "quick_replies":[
+                          {
+                            "content_type":"text",
+                            "title":"台北市",
+                            "payload":payload + "台北市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"新北市",
+                            "payload":payload + "新北市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"基隆市",
+                            "payload":payload + "基隆市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"桃園市",
+                            "payload":payload + "桃園市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"新竹縣",
+                            "payload":payload + "新竹縣 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"新竹市",
+                            "payload":payload + "新竹市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"苗栗縣",
+                            "payload":payload + "苗栗縣 "
+                          }
+                           ]
+                        }
+                }
+            )
+    elif(payload[4]=="2"):
+       data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇縣市:",
+                        "quick_replies":[
+                        {
+                            "content_type":"text",
+                            "title":"台中市",
+                            "payload":payload + "台中市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"彰化縣",
+                            "payload":payload + "彰化縣 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"南投縣",
+                            "payload":payload + "南投縣 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"雲林縣",
+                            "payload":payload + "雲林縣 "
+                          }
+                                  ]
+                        }
+                    }
+                )
+    elif(payload[4]=="3"):
+       data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇縣市:",
+                        "quick_replies":[
+                          {
+                            "content_type":"text",
+                            "title":"嘉義縣",
+                            "payload":payload + "嘉義縣 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"嘉義市",
+                            "payload":payload + "嘉義市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"台南市",
+                            "payload":payload + "台南市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"高雄市",
+                            "payload":payload + "高雄市 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"屏東縣",
+                            "payload":payload + "屏東縣 "
+                          }
+                                  ]
+                        }
+                    }
+                )
+    else:
+        data=json.dumps(
+            {"recipient":{
+                    "id": recipient_id
+                    },
+                "message":{
+                        "text":"請選擇縣市:",
+                        "quick_replies":[
+                          {
+                            "content_type":"text",
+                            "title":"宜蘭縣",
+                            "payload":payload + "宜蘭縣 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"花蓮縣",
+                            "payload":payload + "花蓮縣 "
+                          },
+                          {
+                            "content_type":"text",
+                            "title":"台東縣",
+                            "payload":payload + "台東縣 "
+                          }
+                                  ]
+                        }
+                    }
+                )
+    sendtofb(data)
+    
+def crawler2(sender_id,searchlist):
+    # the animal adoption imformation is crawlered by  http://animal-adoption.coa.gov.tw
+    # this function construct a main template and start to crawler
+    search=searchlist.split()
+    print search
+    template = {
+                    "recipient": {
+                    "id": sender_id
+                    },
+                    "message":{
+                        "attachment":{
+                                "type":"template",
+                                "payload":{
+                                            "template_type":"generic",
+                                            "elements":[
+                                                    ]
+                                            }
+                                    }
+                                }
+                } 
+    # start to crawler
+    res=requests.get("http://www.meetpets.org.tw/pets/{kind}?filter0={location}".format(location=search[2].encode('utf-8'),kind=search[0]))
+    soup = BeautifulSoup(res.text,"lxml") 
+    count=0 #count the number of animal 
+    for item in soup.select(".item-list li"):
+        count=count+1;
+        title = item.select("a")[0].text.encode("utf-8")
+        country = item.select(".view-data-node-data-field-county-field-county-value")[0].text.encode("utf-8")
+        name = item.select(".view-data-node-data-field-pet-name-field-pet-name-value")[0].text.encode("utf-8")
+        age = item.select(".view-data-node-data-field-pet-age-field-pet-age-value")[0].text.encode("utf-8")
+        look = item.select(".view-data-node-data-field-pet-look-field-pet-look-value")[0].text.encode("utf-8")
+        item_url=item_url=item.select("a")[0].get('href')
+        image_url=item.select("img")[0].get('src')
+        template=add_template2(template,title,country,name,age,look,item_url,image_url) #find new imformation,so add this in the template
+    
+    if(count==0): #if number==0 can not find any animal
+        json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
+        json_message(sender_id,"可以試著放寬搜尋條件，或是看看是否有人想送養喔汪汪")
+        json_mainbutton(sender_id)
+    
+    else: #finish the crawler and send data to json_template
+        json_template(template,sender_id)
+        json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
+        
+def add_template2(template,title,country,name,age,look,item_url,image_url):
+    bobble={
+        "title":title,
+        "image_url":image_url,
+        "subtitle":name + '\n' + country + '\n' + age + '\n' + look ,
+        "buttons":
+            [
+                    {
+                        "type":"web_url",
+                        "url":item_url,
+                        "title":"View Website"
+                    }
+            ]    
+        } 
+    template["message"]["attachment"]["payload"]["elements"].append(bobble)
+    return template
 def json_message(recipient_id, message_text): #construct message json
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
