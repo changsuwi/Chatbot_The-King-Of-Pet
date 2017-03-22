@@ -754,7 +754,7 @@ def crawler2(sender_id,searchlist):
         item_url=item_url=item.select("a")[0].get('href')
         image_url=item.select("img")[0].get('src')
         template=add_template2(template,title,country,name,age,look,item_url,image_url) #find new imformation,so add this in the template
-    
+        print template.encode("utf-8")
     if(count==0): #if number==0 can not find any animal
         json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
         json_message(sender_id,"可以試著放寬搜尋條件，或是看看是否有人想送養喔汪汪")
