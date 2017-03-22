@@ -64,7 +64,7 @@ def webhook():
                     elif(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         print "payload={a}".format(a=payload)
-                        if(payload=="1 " or payload=="2 " or payload=="3 " or payload=="4 " ):
+                        if(payload=="1" or payload=="2" or payload=="3" or payload=="4" ):
                             json_chooselocation(sender_id,payload)
                         else:
                             json_chooselocation2(sender_id,payload)
@@ -74,6 +74,7 @@ def webhook():
                         if(len(payload)<=5):
                             json_searchdogcat(sender_id,payload)
                         else:
+                            typingon_json(sender_id) 
                             crawler2(sender_id,payload)
                     elif(message_text==u"全部種類" or message_text==u"狗" or message_text==u"貓"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
@@ -754,7 +755,7 @@ def crawler2(sender_id,searchlist):
         item_url="http://www.meetpets.org.tw"+item.select("a")[0].get('href')
         image_url=item.select("img")[0].get('src')
         template=add_template2(template,title,country,name,age,look,item_url,image_url) #find new imformation,so add this in the template
-        print template
+
     if(count==0): #if number==0 can not find any animal
         json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
         json_message(sender_id,"可以試著放寬搜尋條件，或是看看是否有人想送養喔汪汪")
@@ -765,7 +766,7 @@ def crawler2(sender_id,searchlist):
         json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
         
 def add_template2(template,title,country,name,age,look,item_url,image_url):
-    log("add template")
+
     bobble={
         "title":title,
         "image_url":image_url,
