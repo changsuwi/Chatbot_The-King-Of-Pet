@@ -574,7 +574,7 @@ def json_searchlocation2(recipient_id,payload):
 def json_chooselocation2(recipient_id,payload):
     log("sending chooselocation2 to {recipient}".format(recipient=recipient_id))
     print "count={a}".format(a=payload[4])
-    if(payload[4]=="1 "):
+    if(payload[4]=="1"):
         data=json.dumps(
             {"recipient":{
                     "id": recipient_id
@@ -621,7 +621,7 @@ def json_chooselocation2(recipient_id,payload):
                         }
                 }
             )
-    elif(payload[4]=="2 "):
+    elif(payload[4]=="2"):
        data=json.dumps(
             {"recipient":{
                     "id": recipient_id
@@ -653,7 +653,7 @@ def json_chooselocation2(recipient_id,payload):
                         }
                     }
                 )
-    elif(payload[4]=="3 "):
+    elif(payload[4]=="3"):
        data=json.dumps(
             {"recipient":{
                     "id": recipient_id
@@ -765,6 +765,7 @@ def crawler2(sender_id,searchlist):
         json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
         
 def add_template2(template,title,country,name,age,look,item_url,image_url):
+    log("add template")
     bobble={
         "title":title,
         "image_url":image_url,
