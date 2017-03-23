@@ -56,18 +56,19 @@ def webhook():
                             json_message(sender_id,"87人類")
                     
                     elif(message_text==u"領養資訊搜尋"):
-                        json_searchlocation(sender_id)
+                        json_location(sender_id)
                     elif(message_text==u"民間送養資訊搜尋"):
                         json_choosedogcat2(sender_id)
                     ###use payload to save the data which user send
-                    ###location---> city ---> kind ---> body ---> start crawler
+                    ###領養資訊搜尋：location---> city ---> kind ---> body ---> start crawler
+                    ###民間送養資訊：kind---> location---> city---> start crawler
                     elif(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         print "payload={a}".format(a=payload)
                         if(payload=="1" or payload=="2" or payload=="3" or payload=="4" ):
-                            json_chooselocation(sender_id,payload)
+                            json_city(sender_id,payload)
                         else:
-                            json_chooselocation2(sender_id,payload)
+                            json_city2(sender_id,payload)
                         
                     elif(u"縣" in message_text or u"市" in message_text or message_text==u"北北基宜全部" or message_text==u"桃竹苗全部" or message_text==u"中彰投全部" or message_text==u"雲嘉南全部" or message_text==u"高屏全部" or message_text==u"花東全部"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
@@ -79,7 +80,7 @@ def webhook():
                     elif(message_text==u"全部種類" or message_text==u"狗" or message_text==u"貓"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         if(payload=="dog " or payload=="cat "):
-                            json_searchlocation2(sender_id,payload)
+                            json_location2(sender_id,payload)
                         else:
                             json_searchbodytype(sender_id,payload)
                         
@@ -139,15 +140,14 @@ def crawler(sender_id,searchlist):
     count=0 #count the number of animal 
     for item in soup.select(".an"):
         count=count+1;
-        location=item.select(".area")[0].text.encode("utf-8")
+        city=item.select(".area")[0].text.encode("utf-8")
         gender=item.select(".gender")[0].text.encode("utf-8")
         shelter=item.select(".shelters")[0].text.encode("utf-8")
         item_url=item.select("a")[0].get('href')
-        res2=requests.get(item_url)
-        soup2 = BeautifulSoup(res2.text,"lxml") 
-        for item2 in soup2.select(".carousel-inner"):
-            image_url = item2.select("img")[0].get('src')
-        template=add_template(template,location,gender,shelter,item_url,image_url) #find new imformation,so add this in the template
+        res2=requests.get(item_url)###because high quality image in inner html, so craeler the item_url to catch the image_url
+        soup2 = BeautifulSoup(res2.text,"lxml")
+        image_url=soup2.select(".carousel-inner img")[0].get('src')
+        template=add_template(template,city,gender,shelter,item_url,image_url) #find new imformation,so add this in the template
     
     if(count==0): #if number==0 can not find any animal
         json_message(sender_id,"嗚嗚嗚不好意思，找不到相對應的結果汪汪")
@@ -159,12 +159,12 @@ def crawler(sender_id,searchlist):
         json_message(sender_id,"找到了，我很厲害吧，給我骨頭嘛(搖尾)")
     
     
-def add_template(template,location,gender,shelter,item_url,image_url):
+def add_template(template,city,gender,shelter,item_url,image_url):
     #add new information in to the template
     bobble={
         "title":"寵物",
         "image_url":image_url,
-        "subtitle":location + '\n' + gender+ '\n' + shelter,
+        "subtitle":city + '\n' + gender+ '\n' + shelter,
         "buttons":
             [
                     {
@@ -217,8 +217,8 @@ def json_mainbutton(recipient_id): #construct mainbutton json
     )
     sendtofb(data)
     
-def json_searchlocation(recipient_id):
-    log("sending searchlocation to {recipient}".format(recipient=recipient_id))
+def json_location(recipient_id):
+    log("sending location to {recipient}".format(recipient=recipient_id))
     data=json.dumps(
             {"recipient":{
     "id": recipient_id
@@ -253,8 +253,8 @@ def json_searchlocation(recipient_id):
     )
     sendtofb(data)
 
-def json_chooselocation(recipient_id,count):
-    log("sending chooselocation to {recipient}".format(recipient=recipient_id))
+def json_city(recipient_id,count):
+    log("sending city to {recipient}".format(recipient=recipient_id))
     print "count={a}".format(a=count)
     if(count=="1"):
         data=json.dumps(
@@ -540,8 +540,8 @@ def json_choosedogcat2(recipient_id):
     )
     sendtofb(data)
     
-def json_searchlocation2(recipient_id,payload):
-    log("sending searchlocation2 to {recipient}".format(recipient=recipient_id))
+def json_location2(recipient_id,payload):
+    log("sending location2 to {recipient}".format(recipient=recipient_id))
     data=json.dumps(
             {"recipient":{
     "id": recipient_id
@@ -575,8 +575,8 @@ def json_searchlocation2(recipient_id,payload):
     }
     )
     sendtofb(data)
-def json_chooselocation2(recipient_id,payload):
-    log("sending chooselocation2 to {recipient}".format(recipient=recipient_id))
+def json_city2(recipient_id,payload):
+    log("sending city2 to {recipient}".format(recipient=recipient_id))
     print "count={a}".format(a=payload[4])
     if(payload[4]=="1"):
         data=json.dumps(
@@ -745,7 +745,7 @@ def crawler2(sender_id,searchlist):
                                 }
                 } 
     # start to crawler
-    res=requests.get("http://www.meetpets.org.tw/pets/{kind}?filter0={location}".format(location=search[2].encode('utf-8'),kind=search[0]))
+    res=requests.get("http://www.meetpets.org.tw/pets/{kind}?filter0={city}".format(city=search[2].encode('utf-8'),kind=search[0]))
     soup = BeautifulSoup(res.text,"lxml") 
     count=0 #count the number of animal 
     for item in soup.select(".item-list li"):
