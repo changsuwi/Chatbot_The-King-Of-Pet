@@ -142,7 +142,10 @@ def crawler(sender_id,searchlist):
         location=item.select(".area")[0].text.encode("utf-8")
         gender=item.select(".gender")[0].text.encode("utf-8")
         shelter=item.select(".shelters")[0].text.encode("utf-8")
-        image_url=item.select("img")[0].get('data-original')
+        res2=requests.get("http://animal-adoption.coa.gov.tw/index.php/animal/animal_info/?p=1&id=71014")
+        soup2 = BeautifulSoup(res2.text,"lxml") 
+        for item in soup2.select(".carousel-inner"):
+            image_url = item.select("img")[0].get('src')
         item_url=item.select("a")[0].get('href')
         template=add_template(template,location,gender,shelter,item_url,image_url) #find new imformation,so add this in the template
     
