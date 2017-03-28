@@ -144,9 +144,7 @@ def crawler(sender_id,searchlist):
         gender=item.select(".gender")[0].text.encode("utf-8")
         shelter=item.select(".shelters")[0].text.encode("utf-8")
         item_url=item.select("a")[0].get('href')
-        res2=requests.get(item_url)###because high quality image in inner html, so craeler the item_url to catch the image_url
-        soup2 = BeautifulSoup(res2.text,"lxml")
-        image_url=soup2.select(".carousel-inner img")[0].get('src')
+        image_url=item.select("img")[0].get('src')
         template=add_template(template,city,gender,shelter,item_url,image_url) #find new imformation,so add this in the template
     
     if(count==0): #if number==0 can not find any animal
