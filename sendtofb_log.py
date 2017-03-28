@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Mar 28 16:06:48 2017
-sendtofb and log
+sendtofb and log 寄到Fb的function & log
 @author: vicharm
 """
 import os

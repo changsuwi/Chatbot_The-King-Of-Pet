@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Mar 28 16:50:20 2017
-json_fb
+json_fb 此模組主要存放通用的json格式與打包 例如使用者輸入json ，template打包 ， main button 的json ，message的打包
 @author: vicharm
 """
 from sendtofb_log import sendtofb,log

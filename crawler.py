@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Mar 28 16:47:55 2017
-crawler
+crawler 主要是兩種爬蟲引擎 
 @author: vicharm
 """
 import requests

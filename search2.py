@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Mar 10 16:25:14 2017
-
+search engine two 存放與送養資訊相關的json 與 打包
 @author: vicharm
 """
 from sendtofb_log import sendtofb,log
