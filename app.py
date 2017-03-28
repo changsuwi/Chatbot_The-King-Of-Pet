@@ -144,7 +144,7 @@ def crawler(sender_id,searchlist):
         gender=item.select(".gender")[0].text.encode("utf-8")
         shelter=item.select(".shelters")[0].text.encode("utf-8")
         item_url=item.select("a")[0].get('href')
-        image_url=item.select("img")[0].get('src')
+        image_url=item.select("img")[0].get('data-original')
         template=add_template(template,city,gender,shelter,item_url,image_url) #find new imformation,so add this in the template
     
     if(count==0): #if number==0 can not find any animal
