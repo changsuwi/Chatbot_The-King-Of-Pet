@@ -66,7 +66,20 @@ def json_video(recipient_id):
     db = client.get_default_database()
     collection= db['video']
     for item in collection.find():
-        json_message(recipient_id,item['url'])
+        data={
+                "recipient":{
+                "id":"USER_ID"
+                },
+                "message":{
+                        "attachment":{
+                                "type":"video",
+                                "payload":{
+                                        "url":item['url']
+                                        }
+                                }
+                        }
+                    }
+        json_template(data,recipient_id)
         break
         
 def json_message(recipient_id, message_text): #construct message json
