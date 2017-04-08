@@ -1,6 +1,6 @@
 # coding=utf-8
 from sendtofb_log import log
-from json_fb import typingon_json,json_mainbutton,json_message
+from json_fb import typingon_json,json_mainbutton,json_video,json_message
 from crawler import crawler,crawler2
 from search1 import json_location,json_city,json_searchdogcat,json_searchbodytype
 from search2 import json_choosedogcat2,json_location2,json_city2
@@ -59,7 +59,8 @@ def webhook():
                             json_message(sender_id,"嗚嗚")
                         elif(number==3):
                             json_message(sender_id,"87人類")
-                    
+                    elif(message_text==u"可愛寵物影片推播"):
+                        json_video(sender_id)
                     elif(message_text==u"領養資訊搜尋"):
                         json_location(sender_id)
                     elif(message_text==u"民間送養資訊搜尋"):
