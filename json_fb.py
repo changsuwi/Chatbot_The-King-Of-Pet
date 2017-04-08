@@ -68,7 +68,7 @@ def json_video(recipient_id):
     for item in collection.find():
         data={
                 "recipient":{
-                "id":"USER_ID"
+                "id":recipient_id
                 },
                 "message":{
                         "attachment":{
