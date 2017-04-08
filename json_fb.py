@@ -66,7 +66,8 @@ def json_video(recipient_id):
     db = client.get_default_database()
     collection= db['video']
     for item in collection.find():
-        json_message(recipient_id,item['url']) 
+        json_message(recipient_id,item['url'])
+        break
         
 def json_message(recipient_id, message_text): #construct message json
 
