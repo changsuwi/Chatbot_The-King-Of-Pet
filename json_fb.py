@@ -74,7 +74,7 @@ def json_video(recipient_id):
                         "attachment":{
                                 "type":"video",
                                 "payload":{
-                                        "url":item['url']
+                                        "url":"https://video-tpe1-1.xx.fbcdn.net/v/t42.1790-2/17781300_1460293247338531_344435082691346432_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9zZCJ9&oh=cd9acf5c3d78947d569af31741e97527&oe=58EA01A8"
                                         }
                                 }
                         }
