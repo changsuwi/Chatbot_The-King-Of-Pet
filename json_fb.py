@@ -65,22 +65,22 @@ def json_video(recipient_id):
     client = pymongo.MongoClient(uri)
     db = client.get_default_database()
     collection= db['video']
-    for item in collection.find():
-        data={
-                "recipient":{
-                "id":recipient_id
-                },
-                "message":{
-                        "attachment":{
-                                "type":"video",
-                                "payload":{
-                                        "url":"https://video-tpe1-1.xx.fbcdn.net/v/t42.1790-2/17781300_1460293247338531_344435082691346432_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9zZCJ9&oh=cd9acf5c3d78947d569af31741e97527&oe=58EA01A8"
-                                        }
-                                }
-                        }
+    #for item in collection.find():
+    data={
+            "recipient":{
+            "id":recipient_id
+            },
+            "message":{
+                    "attachment":{
+                            "type":"video",
+                            "payload":{
+                                    "url":"https://video-tpe1-1.xx.fbcdn.net/v/t42.1790-2/17781300_1460293247338531_344435082691346432_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9zZCJ9&oh=cd9acf5c3d78947d569af31741e97527&oe=58EA01A8"
+                                    }
+                            }
                     }
-        json_template(data,recipient_id)
-        break
+                }
+    json_template(data,recipient_id)
+        #break
         
 def json_message(recipient_id, message_text): #construct message json
 
