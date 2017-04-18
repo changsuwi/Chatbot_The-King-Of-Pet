@@ -59,6 +59,10 @@ def webhook():
                             json_message(sender_id,"嗚嗚")
                         elif(number==3):
                             json_message(sender_id,"87人類")
+                    elif(message_text==u"聊天"):
+                        json_message(sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
+                    elif(u"領養" and u"狗" and (u"準備" or u"條件") ):
+                        json_message(sender_id, "1、有獨立經濟能力，年滿二十歲以上，男需役畢，若學生想領養，必須家裡支持。\n2、必須簽一式兩份領養切結書\n3、必須同意犬貓成年後進行結紮手術\n4、同意不定期追蹤\n5、與家人同住的申請人，需得到家庭成員同意。\n6、申請人需親自選定領養動物，不能他人代勞。\n7、申請人必須按政府的規定進行晶片輸入。\n8、需到合法獸醫處注射疫苗。")
                     elif(message_text==u"可愛寵物影片推播"):
                         json_video(sender_id)
                     elif(message_text==u"領養資訊搜尋"):
