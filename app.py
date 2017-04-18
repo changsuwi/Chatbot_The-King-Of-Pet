@@ -61,8 +61,17 @@ def webhook():
                             json_message(sender_id,"87人類")
                     elif(message_text==u"聊天"):
                         json_message(sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
+                    
+                    #http://petbird.tw/article12019.html
                     elif((u"領養" and(u"狗" or u"貓" or u"寵物")and (u"準備" or u"條件" or u"注意" )) in message_text):
                         json_message(sender_id, "1、有獨立經濟能力，年滿二十歲以上，男需役畢，若學生想領養，必須家裡支持。\n2、必須簽一式兩份領養切結書\n3、必須同意犬貓成年後進行結紮手術\n4、同意不定期追蹤\n5、與家人同住的申請人，需得到家庭成員同意。\n6、申請人需親自選定領養動物，不能他人代勞。\n7、申請人必須按政府的規定進行晶片輸入。\n8、需到合法獸醫處注射疫苗。")
+                    
+                    #http://petbird.tw/article13912.html
+                    #http://petbird.tw/article14561.html
+                    elif((u"照顧" and u"貓"and (u"幼" or u"小" or u"剛出生" )) in message_text):
+                        json_message(sender_id, "適合餵食幼貓的小技巧\n1、可以使用湯匙\n2、用奶瓶來餵奶\n幼貓的生活注意事項\n")
+                        json_message(sender_id, "1、衛生非常重要\n初生貓咪總是在窩裡排便，這時就需要主人特別注意窩內衛生，勤洗、勤換、勤消毒，保證貓窩的乾淨，以促進貓咪的健康成長。\n2、施打預防疫苗\n貓瘟病毒對四個月以下的小貓的危害性相當的大，一定要及時打疫苗，做好預防。接種疫苗的時間在小貓12周左右，一歲前共打兩次，兩次間隔20天，以後每年一次。\n3、適時補充水分\n不論是何種動物，水都是非常重要的，若是水分補充不足的話容易引起貓咪便秘，此點不管是幼貓或是成貓都是一樣的。幼貓還不會自己喝水，主人要適時為牠補充。")
+                    
                     elif(message_text==u"可愛寵物影片推播"):
                         json_video(sender_id)
                     elif(message_text==u"領養資訊搜尋"):
