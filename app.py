@@ -115,7 +115,7 @@ def webhook():
                         else:
                             typingon_json(sender_id) 
                             crawler2(sender_id,payload)
-                    elif(message_text==u"全部種類" or message_text==u"狗" ): 
+                    elif(message_text==u"全部種類" or message_text==u"狗" or message_text==u"貓"): 
                         payload=messaging_event["message"]["quick_reply"]["payload"]
                         if(payload=="dog " or payload=="cat "):
                             json_location2(sender_id,payload)
