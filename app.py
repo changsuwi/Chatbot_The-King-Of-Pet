@@ -91,6 +91,8 @@ def webhook():
                         json_message(sender_id,"一、什麼原因導致貓咪腹瀉？\n1、食用變質食品\n。貓罐頭若是打開後沒馬上食用完畢，大概過個一小時裡面的食物就變得不新鮮了。\n2、貓咪運動不足\n沒有達到一定的運動量會造成貓咪的腸胃蠕動機能有所障礙，導致食物滯留在大腸裡\n3、改變飲食習慣\n若是突然更改食物可能會導致貓咪腸胃適應不良。或是飲食中沒有補充足夠的纖維，也會導致貓咪腸胃不舒服。")
                         json_message(sender_id,"二、如何治療貓咪腹瀉？\n1、何時去看獸醫\n如果貓咪持續腹瀉超過一天，或貓咪有嘔吐、嗜睡、發燒或是食慾不振，甚至是不明原因體重下降，那麼就必須去給獸醫檢查。\n2、給予足夠水分\n3、更改貓咪飲食\n可回想看看貓咪發生腹瀉前是吃了什麼食物，或是可能對那些食物過敏，避免再次攝入那些食物。可添加一些富含纖維的食物於貓罐頭或是貓糧中混合給貓咪吃或是額外添加益生菌，將有助於緩解腸道發炎及過敏反應。")
                         json_message(sender_id,"三、該如何預防貓咪腹瀉？\n1、別讓貓喝牛奶\n2、定期幫牠驅蟲\n大約每半年到一年定期幫貓咪驅蟲。\n3、改善飲食內容\n如果貓咪常常一換飼料就會拉肚子的話，那麼就減少飼料更換的次數，若是因為一些因素必須得更換的話，就採取循序漸進的方式，將少量比例的新飼料與舊飼料混合，之後慢慢將新飼料的比例提高使貓咪腸道有足夠的時間去適應。")
+                    elif(u"貓" in message_text and ((u"不能" in message_text or u"不行" in message_text) and (u"吃" in message_text or u"食" in message_text)) or (u"可以" in message_text and (u"牛奶" in message_text or u"巧克力" in message_text) and u"嗎" in message_text) ):
+                        json_message(sender_id,"貓咪不能吃巧克力\n含木醣醇的食物(EX 口香糖)\n葡萄或葡萄乾\n乳製品\n ")
                     elif(message_text==u"可愛寵物影片推播"):
                         json_video(sender_id)
                     elif(message_text==u"領養資訊搜尋"):
