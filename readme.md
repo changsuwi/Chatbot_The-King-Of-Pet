@@ -1,18 +1,29 @@
-Chatbot on Messenger 
+# 寵物 Chatbot
 
-已建構以下網站的基本搜尋系統至chatbot  
-=========
+## 簡介
 
-page url：http://animal-adoption.coa.gov.tw/index.php/index  
-page url:http://www.meetpets.org.tw/    
+Platform：messenger
 
+PAAS：Heroku
 
+Language：Python
 
-已知bug
-======
-進入第二次爬蟲抓取圖片時，fb會持續傳同一份json進heroku，導致重複傳訊息給user，目前暫定取消第二次爬蟲   
+這是一個很了解毛小孩的Chatbot，目前尚在開發階段:fire::fire::fire:
 
-將來要做的事
-=====
-* 將搜尋功能完整
-* 開發其他功能
+## 功能
+
+> **1.毛小孩知識王(緩慢建構資料中...:tired_face:)**
+>> 懂得很多狗狗貓貓的知識，只要在對話框輸入想問的問題，它都可以回答喔!
+>> 
+> **2.寵物影片推播(慢慢的等好用的api出來:sob:)**
+>>可以推播可愛狗狗貓貓的影片給使用者喔~
+>>
+> **3.寵物領養資訊搜尋(已建構完成:tada:)**
+>>可以找領養資訊
+>>
+> **4.寵物送養資訊搜尋(已建構完成:tada:)**
+>>可以找送養資訊
+>>
+> **5.交換明信片(構思中 :dog:)**
+>>配對使用者，讓使用者可以跟其他人交換毛小孩明信片，用圖片以及簡短的文字做互動
+ 
