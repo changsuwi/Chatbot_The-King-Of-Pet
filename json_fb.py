@@ -41,6 +41,11 @@ def json_mainbutton(recipient_id): #construct mainbutton json
       },
       {
         "content_type":"text",
+        "title":"交換明信片",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_POSTCARD"
+      },
+      {
+        "content_type":"text",
         "title":"可愛寵物影片推播",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_MOVIE"
       },
@@ -59,6 +64,15 @@ def json_mainbutton(recipient_id): #construct mainbutton json
     }
     )
     sendtofb(data)
+def json_postcard_name(recipient_id):
+    log("sending postcard_name to {recipient}".format(recipient=recipient_id))
+    json_message(recipient_id,"請輸入姓名\n格式為:\n姓名:寵物名稱\nEX:\n姓名:蛋黃哥")
+def json_postcard_context(recipient_id):
+    log("sending postcard_context to {recipient}".format(recipient=recipient_id))
+    json_message(recipient_id,"輸入一小段話來認識新朋友吧\n格式為:\n內容:文字\nEX:\n內容:這是我家的小母狗蛋黃，很可愛吧")
+def json_postcard_photo(recipient_id):
+    log("sending postcard_photo to {recipient}".format(recipient=recipient_id))
+    json_message(recipient_id,"傳送一張寵物的可愛照吧~")
 def json_video(recipient_id):
     log("sending video to {recipient}".format(recipient=recipient_id))
     uri = 'mongodb://vic010744:vic32823@ds135700.mlab.com:35700/heroku_4w25h5pt'
