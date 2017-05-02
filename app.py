@@ -5,6 +5,7 @@ from crawler import crawler,crawler2
 from search1 import json_location,json_city,json_searchdogcat,json_searchbodytype
 from search2 import json_choosedogcat2,json_location2,json_city2
 from imgur import upload_photo 
+from db import upload_db_photo_url
 import os
 
 
@@ -115,6 +116,7 @@ def webhook():
                             json_message(sender_id,"斜眼看著主人\n斜眼表示貓咪對主人很滿意，可能是食物很好吃或是環境很舒服等，都是貓咪感到開心的時候。")
                         elif(message_text==u"交換明信片"):
                             json_message(sender_id,"請先傳送一張寵物的可愛照吧~")
+                        elif(u"內容：" in message_text):
                             
                         elif(message_text==u"可愛寵物影片推播"):
                             json_video(sender_id)
@@ -157,8 +159,9 @@ def webhook():
                         for attachment in messaging_event["message"]["attachments"]:
                             url=attachment["payload"]["url"]
                         upload_photo(url)
+                        upload_db_photo_url(url,sender_id)
                         json_message(sender_id,"已收到圖片")
-                        json_message(sender_id,"請輸入寵物簡單的明信片內容\n格式為:\n內容:文字\n 例如")
+                        json_message(sender_id,"請輸入寵物簡單的明信片內容\n格式為:\n內容文字\n 例如")
                         json_message(sender_id,"內容:這是我家的可愛小狗，叫作蛋黃")
                         # 待補
                 if messaging_event.get("delivery"):  # delivery confirmation
