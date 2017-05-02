@@ -114,7 +114,7 @@ def webhook():
                         elif(u"貓" in message_text and u"斜眼" in message_text ):
                             json_message(sender_id,"斜眼看著主人\n斜眼表示貓咪對主人很滿意，可能是食物很好吃或是環境很舒服等，都是貓咪感到開心的時候。")
                         elif(message_text==u"交換明信片"):
-                            json_message(recipient_id,"請先傳送一張寵物的可愛照吧~")
+                            json_message(sender_id,"請先傳送一張寵物的可愛照吧~")
                             
                         elif(message_text==u"可愛寵物影片推播"):
                             json_video(sender_id)
