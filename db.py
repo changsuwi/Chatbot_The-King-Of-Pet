@@ -6,7 +6,7 @@ import pymongo
 
 ### Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
-uri = 'mongodb://vic010744:vic32823@ds023455.mlab.com:23455/heroku_4w25h5pt' 
+uri = 'mongodb://vic010744:vic32823@ds135700.mlab.com:35700/heroku_4w25h5pt' 
 
 ###############################################################################
 # main
