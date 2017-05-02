@@ -1,6 +1,6 @@
 # coding=utf-8
 from sendtofb_log import log
-from json_fb import typingon_json,json_mainbutton,json_video,json_message,json_postcard_name,json_postcard_context
+from json_fb import typingon_json,json_mainbutton,json_video,json_message,json_postcard_name,json_postcard_context,json_postcard_photo
 from crawler import crawler,crawler2
 from search1 import json_location,json_city,json_searchdogcat,json_searchbodytype
 from search2 import json_choosedogcat2,json_location2,json_city2
