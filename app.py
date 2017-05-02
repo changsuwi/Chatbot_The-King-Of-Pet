@@ -46,7 +46,7 @@ def webhook():
                     if(messaging_event["message"].has_key("text")):
                         message_text = messaging_event["message"]["text"]  # the message's text
                         print(sender_id) #test
-                        if(message_text=="Hello" or message_text=="Hi" or message_text==u"嗨" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi"):
+                        if(message_text=="Hello" or message_text=="Hi" or message_text==u"嗨" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi" or message_text==u"哈囉"):
                             json_message(sender_id, "汪汪")
                             json_mainbutton(sender_id)
                         elif(message_text==u"幹" or message_text==u"靠杯" or message_text==u"靠北" or message_text==u"87"):
@@ -155,7 +155,7 @@ def webhook():
                             crawler(sender_id,searchlist)
                         else:
                             json_message(sender_id,"好的")
-                    elif(messaging_event["message"].has_key("attachment")):
+                    elif(messaging_event["message"].has_key("attachments")):
                         json_message(sender_id,"已收到圖片")
                         # 待補
                 if messaging_event.get("delivery"):  # delivery confirmation
