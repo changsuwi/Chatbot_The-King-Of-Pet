@@ -118,7 +118,6 @@ def webhook():
                             json_postcard_context(sender_id)
                         elif(u"內容:" in message_text):
                             json_postcard_photo(sender_id)
-                        elif()
                         elif(message_text==u"可愛寵物影片推播"):
                             json_video(sender_id)
                         elif(message_text==u"領養資訊搜尋"):
