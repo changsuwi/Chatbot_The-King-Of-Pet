@@ -1,9 +1,10 @@
 # coding=utf-8
 from sendtofb_log import log
-from json_fb import typingon_json,json_mainbutton,json_video,json_message,json_postcard_name,json_postcard_context,json_postcard_photo
+from json_fb import typingon_json,json_mainbutton,json_video,json_message
 from crawler import crawler,crawler2
 from search1 import json_location,json_city,json_searchdogcat,json_searchbodytype
 from search2 import json_choosedogcat2,json_location2,json_city2
+from imgur import upload_photo 
 import os
 
 
@@ -113,11 +114,8 @@ def webhook():
                         elif(u"貓" in message_text and u"斜眼" in message_text ):
                             json_message(sender_id,"斜眼看著主人\n斜眼表示貓咪對主人很滿意，可能是食物很好吃或是環境很舒服等，都是貓咪感到開心的時候。")
                         elif(message_text==u"交換明信片"):
-                            json_postcard_name(sender_id)
-                        elif(u"姓名:" in message_text):
-                            json_postcard_context(sender_id)
-                        elif(u"內容:" in message_text):
-                            json_postcard_photo(sender_id)
+                            json_message(recipient_id,"請先傳送一張寵物的可愛照吧~")
+                            
                         elif(message_text==u"可愛寵物影片推播"):
                             json_video(sender_id)
                         elif(message_text==u"領養資訊搜尋"):
@@ -156,7 +154,12 @@ def webhook():
                         else:
                             json_message(sender_id,"好的")
                     elif(messaging_event["message"].has_key("attachments")):
+                        for attachment in messaging_event["message"]["attachments"]:
+                            url=attachment["payload"]["url"]
+                        upload_photo(url)
                         json_message(sender_id,"已收到圖片")
+                        json_message(sender_id,"請輸入寵物簡單的明信片內容\n格式為:\n內容:文字\n 例如")
+                        json_message(sender_id,"內容:這是我家的可愛小狗，叫作蛋黃")
                         # 待補
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
