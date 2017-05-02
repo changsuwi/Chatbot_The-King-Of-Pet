@@ -159,7 +159,7 @@ def webhook():
                     elif(messaging_event["message"].has_key("attachments")):
                         for attachment in messaging_event["message"]["attachments"]:
                             url=attachment["payload"]["url"]
-                        upload_photo(url)
+                        url=upload_photo(url)
                         upload_db_photo_url(url,sender_id)
                         json_message(sender_id,"已收到圖片")
                         json_message(sender_id,"請輸入寵物簡單的明信片內容\n格式為:\n內容文字\n 例如")
