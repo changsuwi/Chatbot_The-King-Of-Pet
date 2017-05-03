@@ -88,7 +88,7 @@ def webhook():
                                 ###use payload to save the data which user send
                                 ###領養資訊搜尋：location---> city ---> kind ---> body ---> start crawler
                                 ###民間送養資訊：kind---> location---> city---> start crawler
-                                elif(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
+                                if(message_text==u"北部地區" or message_text==u"中部地區" or message_text==u"南部地區" or message_text==u"東部地區"):
                                     payload=messaging_event["message"]["quick_reply"]["payload"]
                                     print "payload={a}".format(a=payload)
                                     if(payload=="1" or payload=="2" or payload=="3" or payload=="4" ):
@@ -115,8 +115,7 @@ def webhook():
                                     searchlist=messaging_event["message"]["quick_reply"]["payload"] ###get payload
                                     crawler(sender_id,searchlist)
                 
-                        else:
-                            json_message(sender_id,"好的")
+                        
                     elif(messaging_event["message"].has_key("attachments") and get_flag(sender_id)==2):
                         for attachment in messaging_event["message"]["attachments"]:
                             url=attachment["payload"]["url"]
