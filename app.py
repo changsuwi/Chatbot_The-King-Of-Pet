@@ -5,7 +5,7 @@ from crawler import crawler,crawler2
 from search1 import json_location,json_city,json_searchdogcat,json_searchbodytype
 from search2 import json_choosedogcat2,json_location2,json_city2
 from imgur import upload_photo 
-from db import upload_db_photo_url,upload_db_intro
+from db import upload_db_photo_url,upload_db_intro,upload_flag,get_flag
 import os
 
 
@@ -62,6 +62,7 @@ def webhook():
                             elif(number==3):
                                 json_message(sender_id,"87人類")
                         elif(message_text==u"聊天"):
+                            upload_flag(1,sender_id)
                             json_message(sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
                         #寵物領養須知問答
                         #http://petbird.tw/article12019.html
@@ -115,15 +116,19 @@ def webhook():
                         elif(u"貓" in message_text and u"斜眼" in message_text ):
                             json_message(sender_id,"斜眼看著主人\n斜眼表示貓咪對主人很滿意，可能是食物很好吃或是環境很舒服等，都是貓咪感到開心的時候。")
                         elif(message_text==u"交換明信片"):
+                            upload_flag(2,sender_id)
                             json_message(sender_id,"請先傳送一張寵物的可愛照吧~")
                         elif(u"內容：" in message_text):
                             upload_db_intro(message_text,sender_id)
                             json_message(sender_id,"已完成，請耐心等待神秘的明信片")
                         elif(message_text==u"可愛寵物影片推播"):
+                            upload_flag(3,sender_id)
                             json_video(sender_id)
                         elif(message_text==u"領養資訊搜尋"):
+                            upload_flag(4,sender_id)
                             json_location(sender_id)
                         elif(message_text==u"民間送養資訊搜尋"):
+                            upload_flag(5,sender_id)
                             json_choosedogcat2(sender_id)
                         ###use payload to save the data which user send
                         ###領養資訊搜尋：location---> city ---> kind ---> body ---> start crawler

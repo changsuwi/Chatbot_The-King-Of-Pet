@@ -12,7 +12,24 @@ uri = 'mongodb://vic010744:vic32823@ds135700.mlab.com:35700/heroku_4w25h5pt'
 # main
 ###############################################################################
 
+def upload_flag(flag,sender_id):
+    client = pymongo.MongoClient(uri)
 
+    db = client.get_default_database()
+    
+    Category = db['flag']
+    
+    query = {'ID': sender_id}
+    Category.update(query,{'$set': {'category': flag}})
+    
+def get_flag(sender_id):
+    client = pymongo.MongoClient(uri)
+
+    db = client.get_default_database()
+    
+    Category = db['flag']
+    dat = Category.find({'ID': {'$gte': sender_id}})
+    return dat['flag']
 
 def upload_db_photo_url(url,sender_id):
 
