@@ -141,7 +141,7 @@ def webhook():
 
 def setup():
     get_start()
-
+    set_manu()
 
 if __name__ == '__main__':
     app.run(debug=True)
