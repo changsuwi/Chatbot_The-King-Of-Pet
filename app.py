@@ -1,6 +1,6 @@
 # coding=utf-8
 from sendtofb_log import log
-from json_fb import typingon_json,json_mainbutton,json_video,json_message,get_start
+from json_fb import typingon_json,json_mainbutton,json_video,json_message,get_start,set_manu
 from chat import chat
 from crawler import crawler,crawler2
 from search1 import json_location,json_city,json_searchdogcat,json_searchbodytype
@@ -39,7 +39,8 @@ def webhook():
     # endpoint for processing incoming messaging events
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
-
+    get_start()
+    set_manu()
     if data["object"] == "page":
 
         for entry in data["entry"]:
