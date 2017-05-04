@@ -9,6 +9,16 @@ import pymongo
 import pprint
 import json
 
+def get_start():
+    data = json.dumps(
+    { 
+            "get_started":
+            {
+                    "payload":"GET_STARTED_PAYLOAD"
+            }
+    })
+    sendtofb(data)
+    
 def typingon_json(recipient_id): 
     
     #construct typing on json 
