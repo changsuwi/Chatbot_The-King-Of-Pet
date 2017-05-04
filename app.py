@@ -30,8 +30,7 @@ def verify():
 
 @app.route('/', methods=['POST'])
 
-def setup():
-    get_start()
+
 
             
 def webhook():
@@ -139,7 +138,8 @@ def webhook():
 
     return "ok", 200
 
-
+def setup():
+    get_start()
 
 
 if __name__ == '__main__':
