@@ -52,6 +52,7 @@ def webhook():
                         message_text = messaging_event["message"]["text"]  # the message's text
                         print(sender_id) #test
                         if(message_text=="Hello" or message_text=="Hi" or message_text==u"嗨" or message_text==u"妳好" or message_text==u"你好" or message_text=="hello" or message_text=="hi" or message_text==u"哈囉"):
+                            upload_flag(0,sender_id)
                             json_message(sender_id, "汪汪")
                             json_mainbutton(sender_id)
                         elif(message_text==u"幹" or message_text==u"靠杯" or message_text==u"靠北" or message_text==u"87"):
