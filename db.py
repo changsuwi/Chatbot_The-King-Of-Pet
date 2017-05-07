@@ -47,11 +47,16 @@ def upload_db_photo_url(url,sender_id):
     Postcard = db['Postcard']
 
     # Note that the insert method can take either an array or a single dict.
-    SEED_DATA={
-            'url': url,
-            'ID': sender_id
-            }
-    Postcard.insert_one(SEED_DATA)
+    query = {'ID': sender_id}
+    if(Postcard.find(query).count == 0):
+        
+        SEED_DATA={
+                'url': url,
+                'ID': sender_id
+                }
+        Postcard.insert_one(SEED_DATA)
+    else:
+        Postcard.update(query,{'$set': {'url': sender_id}})
 def upload_db_intro(text,sender_id):
     client = pymongo.MongoClient(uri)
 
