@@ -56,7 +56,7 @@ def upload_db_photo_url(url,sender_id):
                 }
         Postcard.insert_one(SEED_DATA)
     else:
-        Postcard.update(query,{'$set': {'url': sender_id}})
+        Postcard.update(query,{'$set': {'url': url}})
 def upload_db_intro(text,sender_id):
     client = pymongo.MongoClient(uri)
 
