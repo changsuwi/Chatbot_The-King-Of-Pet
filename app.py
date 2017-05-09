@@ -112,7 +112,7 @@ def webhook():
                                     else:
                                         json_searchbodytype(sender_id,payload)
                                     
-                                elif(message_text==u"全部體型" or message_text==u"迷你型"  or message_text==u"中型" or message_text==u"大型"):
+                                elif(message_text==u"全部體型" or message_text==u"迷你型" or message_text==u"小型" or message_text==u"中型" or message_text==u"大型"):
                                     typingon_json(sender_id) 
                                     searchlist=messaging_event["message"]["quick_reply"]["payload"] ###get payload
                                     crawler(sender_id,searchlist)
