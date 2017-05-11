@@ -48,13 +48,13 @@ def upload_db_photo_url(url,sender_id):
 
     # Note that the insert method can take either an array or a single dict.
     query = {'ID': sender_id}
-    if(Postcard.find(query).count == 0):
+    if(Postcard.count(query) == 0):
         
         SEED_DATA={
                 'url': url,
                 'ID': sender_id
                 }
-        print Postcard.insertOne(SEED_DATA)
+        print Postcard.insert_one(SEED_DATA)
     else:
         Postcard.update(query,{'$set': {'url': url}})
 def upload_db_intro(text,sender_id):
