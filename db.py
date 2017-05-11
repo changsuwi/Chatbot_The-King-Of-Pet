@@ -55,10 +55,8 @@ def upload_db_photo_url(url,sender_id):
                 'ID': sender_id
                 }
         Postcard.insert_one(SEED_DATA)
-        print ("upload done !")
     else:
         Postcard.update(query,{'$set': {'url': url}})
-        print ("upload done !")
 def upload_db_intro(text,sender_id):
     client = pymongo.MongoClient(uri)
 
@@ -69,8 +67,7 @@ def upload_db_intro(text,sender_id):
 
     Postcard = db['Postcard']
     query = {'ID': sender_id}
-    Postcard.update(query,{'$set': {'intro': text,'match': 0,'match_id': ""}})
-    print ("upload done !")
+    Postcard.update(query,{'$set': {'intro': text,'match': '0','match_id': "None"}})
     # Then we need to give Boyz II Men credit for their contribution to
     # the hit "One Sweet Day".
 
