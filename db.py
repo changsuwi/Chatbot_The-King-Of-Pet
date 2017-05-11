@@ -44,7 +44,7 @@ def upload_db_photo_url(url,sender_id):
     # First we'll add a few songs. Nothing is required to create the songs 
     # collection; it is created automatically when we insert.
 
-    Postcard = db['Postcard']
+    Postcard = db['postcard']
 
     # Note that the insert method can take either an array or a single dict.
     query = {'ID': sender_id}
@@ -54,7 +54,7 @@ def upload_db_photo_url(url,sender_id):
                 'url': url,
                 'ID': sender_id
                 }
-        Postcard.insert_one(SEED_DATA)
+        print Postcard.insertOne(SEED_DATA)
     else:
         Postcard.update(query,{'$set': {'url': url}})
 def upload_db_intro(text,sender_id):
@@ -65,7 +65,7 @@ def upload_db_intro(text,sender_id):
     # First we'll add a few songs. Nothing is required to create the songs 
     # collection; it is created automatically when we insert.
 
-    Postcard = db['Postcard']
+    Postcard = db['postcard']
     query = {'ID': sender_id}
     Postcard.update(query,{'$set': {'intro': text,'match': '0','match_id': "None"}})
     # Then we need to give Boyz II Men credit for their contribution to
