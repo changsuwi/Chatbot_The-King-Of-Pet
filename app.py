@@ -1,12 +1,12 @@
 # coding=utf-8
 from sendtofb_log import log
-from json_fb import typingon_json, json_mainbutton, json_video, json_message
+from json_fb import typingon_json, json_mainbutton, json_video, json_message, json_photo
 from chat import chat
 from crawler import crawler, crawler2
 from search1 import json_location, json_city, json_searchdogcat, json_searchbodytype
 from search2 import json_choosedogcat2, json_location2, json_city2
 from imgur import upload_photo
-from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag
+from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag, get_mail
 import os
 
 
@@ -134,7 +134,12 @@ def webhook():
 
                 # user clicked/tapped "postback" button in earlier message
                 if messaging_event.get("postback"):
-                    pass
+                    if messaging_event['postback']['payload'] == 'get_match_mail':
+                        mail = get_mail(sender_id)
+                        intro = mail['intro']
+                        img_url = mail['url']
+                        json_photo(sender_id, img_url)
+                        json_message(sender_id, intro)
 
     return "ok", 200
 

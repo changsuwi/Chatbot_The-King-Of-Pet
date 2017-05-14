@@ -83,6 +83,24 @@ def json_video(recipient_id):
     json_template(data, recipient_id)
 
 
+def json_photo(recipient_id, url):
+    log("sending photo to {recipient}".format(recipient=recipient_id))
+    data = {
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "photo",
+                "payload": {
+                    "url": url
+                }
+            }
+        }
+    }
+    sendtofb(data)
+
+
 def json_message(recipient_id, message_text):  # construct message json
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
