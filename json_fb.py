@@ -91,7 +91,7 @@ def json_photo(recipient_id, url):
         },
         "message": {
             "attachment": {
-                "type": "photo",
+                "type": "image",
                 "payload": {
                     "url": url
                 }
