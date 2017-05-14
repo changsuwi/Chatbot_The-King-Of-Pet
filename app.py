@@ -138,7 +138,7 @@ def webhook():
                         intro = mail['intro']
                         img_url = mail['url']
                         json_photo(sender_id, img_url)
-                        json_message(sender_id, intro)
+                        json_message(sender_id, intro.encode('utf-8'))
 
     return "ok", 200
 
