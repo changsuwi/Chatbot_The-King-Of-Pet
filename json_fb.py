@@ -85,7 +85,7 @@ def json_video(recipient_id):
 
 def json_photo(recipient_id, url):
     log("sending photo to {recipient}".format(recipient=recipient_id))
-    data = {
+    data = json.dumps({
         "recipient": {
             "id": recipient_id
         },
@@ -97,7 +97,7 @@ def json_photo(recipient_id, url):
                 }
             }
         }
-    }
+    })
     sendtofb(data)
 
 
