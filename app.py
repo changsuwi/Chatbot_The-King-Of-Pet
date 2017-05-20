@@ -133,7 +133,11 @@ def webhook():
 
                 # user clicked/tapped "postback" button in earlier message
                 if messaging_event.get("postback"):
-                    if messaging_event["postback"]["payload"] == 'main_button1':
+                    if messaging_event["postback"]["payload"] == 'GET_STARTED_PAYLOAD':
+                        upload_flag(0, sender_id)
+                        json_message(sender_id, "汪汪")
+                        json_mainbutton(sender_id)
+                    elif messaging_event["postback"]["payload"] == 'main_button1':
                         upload_flag(1, sender_id)
                         json_message(
                             sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
