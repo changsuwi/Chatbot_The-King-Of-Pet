@@ -75,7 +75,7 @@ def json_video(recipient_id):
             "attachment": {
                 "type": "video",
                 "payload": {
-                    "url": "https://video-tpe1-1.xx.fbcdn.net/v/t42.1790-2/17781300_1460293247338531_344435082691346432_n.mp4?efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9zZCJ9&oh=cd9acf5c3d78947d569af31741e97527&oe=58EA01A8"
+                    "url": "https://r6---sn-u5oxu-uooe.googlevideo.com/videoplayback?lmt=1492925516230696&ip=140.116.1.136&pl=19&dur=527.046&mv=m&source=youtube&ms=au&ei=20wiWbWNGomz4gLKhY-oBw&mn=sn-u5oxu-uooe&mm=31&id=o-AKDAHfT410h3N80zSZuM9lqMOAVRhtonRN5oUiyQh-Bo&signature=D6AF22F97BC4855FFF93B207F5A37AF2E4BA6202.0AE794100DF50BB1CA89E75E206A565D5A3D0EF8&requiressl=yes&mt=1495420041&itag=22&ratebypass=yes&ipbits=0&initcwndbps=5277500&mime=video%2Fmp4&key=yt6&sparams=dur%2Cei%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cupn%2Cexpire&expire=1495441723&upn=0Qky2oY2CYk"
                 }
             }
         }
