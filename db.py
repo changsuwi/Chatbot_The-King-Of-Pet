@@ -2,7 +2,7 @@
 
 
 import pymongo
-
+import random
 
 #  Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
@@ -56,3 +56,16 @@ def get_mail(sender_id):
     query = {'ID': sender_id}
     data = Postcard.find_one(query)
     return data
+
+
+def get_video():
+    Video = db['video']
+    videos = Video.find()
+    videos = Video.find()
+    count = videos.count()
+    video_list = []
+    for x in range(0, 3):
+        video = videos[random.randint(0, count - 1)]
+        video_list.append(video)
+    return video_list
+

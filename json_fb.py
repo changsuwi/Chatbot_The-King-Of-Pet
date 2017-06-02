@@ -17,10 +17,23 @@ def typingon_json(recipient_id):
     sendtofb(data)
 
 
-def json_template(template, recipient_id):
-    log("sending  template to {recipient}".format(recipient=recipient_id))
-    data = json.dumps(template)
-    sendtofb(data)
+def json_template(recipient_id):
+    template = {
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": [
+                    ]
+                }
+            }
+        }
+    }
+    return template
 
 
 def json_mainbutton(recipient_id):
@@ -65,24 +78,6 @@ def json_mainbutton(recipient_id):
         }
     )
     sendtofb(data)
-
-
-def json_video(recipient_id):
-    log("sending video to {recipient}".format(recipient=recipient_id))
-    data = {
-        "recipient": {
-            "id": recipient_id
-        },
-        "message": {
-            "attachment": {
-                "type": "video",
-                "payload": {
-                    "url": "https://r6---sn-u5oxu-uooe.googlevideo.com/videoplayback?lmt=1492925516230696&ip=140.116.1.136&pl=19&dur=527.046&mv=m&source=youtube&ms=au&ei=20wiWbWNGomz4gLKhY-oBw&mn=sn-u5oxu-uooe&mm=31&id=o-AKDAHfT410h3N80zSZuM9lqMOAVRhtonRN5oUiyQh-Bo&signature=D6AF22F97BC4855FFF93B207F5A37AF2E4BA6202.0AE794100DF50BB1CA89E75E206A565D5A3D0EF8&requiressl=yes&mt=1495420041&itag=22&ratebypass=yes&ipbits=0&initcwndbps=5277500&mime=video%2Fmp4&key=yt6&sparams=dur%2Cei%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cupn%2Cexpire&expire=1495441723&upn=0Qky2oY2CYk"
-                }
-            }
-        }
-    }
-    json_template(data, recipient_id)
 
 
 def json_photo(recipient_id, url):

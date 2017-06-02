@@ -1,12 +1,13 @@
 # coding=utf-8
 from sendtofb_log import log
-from json_fb import typingon_json, json_mainbutton, json_video, json_message, json_photo
+from json_fb import typingon_json, json_mainbutton, json_message, json_photo
 from chat import chat
-from crawler import crawler, crawler2
+from adopt import crawler, crawler2
 from search1 import json_location, json_city, json_searchdogcat, json_searchbodytype
 from search2 import json_choosedogcat2, json_location2, json_city2
 from imgur import upload_photo
-from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag, get_mail
+from video import deal_video
+from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag, get_mail, get_video
 import os
 
 
@@ -146,7 +147,8 @@ def webhook():
                         json_message(sender_id, "請先傳送一張寵物的可愛照吧~")
                     elif messaging_event["postback"]["payload"] == 'main_button3':
                         upload_flag(3, sender_id)
-                        json_video(sender_id)
+                        videos = get_video()
+                        deal_video(sender_id, videos)
                     elif messaging_event["postback"]["payload"] == 'main_button4':
                         upload_flag(4, sender_id)
                         json_location(sender_id)
