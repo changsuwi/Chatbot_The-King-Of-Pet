@@ -69,7 +69,8 @@ def webhook():
                             json_message(sender_id, "請先傳送一張寵物的可愛照吧~")
                         elif(message_text == u"可愛寵物影片推播"):
                             upload_flag(3, sender_id)
-                            json_video(sender_id)
+                            videos = get_video()
+                            deal_video(sender_id)
                         elif(message_text == u"領養資訊搜尋"):
                             upload_flag(4, sender_id)
                             json_location(sender_id)
