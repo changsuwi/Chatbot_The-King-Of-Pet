@@ -70,7 +70,7 @@ def webhook():
                         elif(message_text == u"可愛寵物影片推播"):
                             upload_flag(3, sender_id)
                             videos = get_video()
-                            deal_video(sender_id)
+                            deal_video(sender_id, videos)
                         elif(message_text == u"領養資訊搜尋"):
                             upload_flag(4, sender_id)
                             json_location(sender_id)
