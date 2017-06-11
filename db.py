@@ -61,10 +61,9 @@ def get_mail(sender_id):
 def get_video():
     Video = db['video']
     videos = Video.find()
-    videos = Video.find()
     count = videos.count()
     video_list = []
-    for x in range(0, 3):
+    for x in range(0, 7):
         video = videos[random.randint(0, count - 1)]
         video_list.append(video)
     return video_list

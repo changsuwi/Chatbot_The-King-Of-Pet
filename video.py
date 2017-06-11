@@ -5,7 +5,7 @@ from sendtofb_log import sendtofb
 
 def deal_video(recipient_id, videos):
     template = json_template(recipient_id)
-    for x in range(0, 3):
+    for x in range(0, 7):
         title = videos[x]['title']
         url = videos[x]['url']
         thumbnails = videos[x]['thumbnails']
