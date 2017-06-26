@@ -101,3 +101,10 @@ def deal_subscription(sender_id, mode):
             Subscription.insert_one(SEED_DATA)
         else:
             Subscription.update(query, {'$set': {'subscription': 1}})
+
+
+def get_reci_id(sender_id):
+    Postcard = db['postcard']
+    query = {'ID': sender_id}
+    data = Postcard.find_one(query)
+    return data['match_id']

@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from ..json_fb import json_mainbutton, json_message, json_photo, json_subscription
+from ..json_fb import json_mainbutton, json_message, json_photo
+from ..json_fb import json_subscription, json_ask_reply_mail
 from adopt.search1 import json_location
 from adopt.search2 import json_choosedogcat2
 from video import deal_video
@@ -37,6 +38,7 @@ def postback_control(messaging_event, sender_id):
         img_url = mail['url']
         json_photo(sender_id, img_url)
         json_message(sender_id, intro.encode('utf-8'))
+        json_ask_reply_mail(sender_id)
     elif messaging_event['postback']['payload'] == 'subscription_yes':
         deal_subscription(sender_id, 1)
         json_message(sender_id, "訂閱完成")
@@ -44,3 +46,7 @@ def postback_control(messaging_event, sender_id):
         deal_subscription(sender_id, 0)
         json_message(
             sender_id, "好的，若未來有需要訂閱，點選\n工作列->\n可愛動物影片推播->\n訂閱功能")
+    elif messaging_event['postback']['payload'] == 'reply_yes':
+        json_message(
+            sender_id, "本汪已準備好，幫你寄信拉～ 不管是文字 圖片 音訊 都交給本汪吧")
+        upload_flag(6, sender_id)

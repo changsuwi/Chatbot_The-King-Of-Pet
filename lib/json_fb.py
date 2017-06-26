@@ -51,27 +51,27 @@ def json_mainbutton(recipient_id):
                     {
                         "content_type": "text",
                         "title": "聊天",
-                        "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_CHAT"
+                        "payload": "main_button1"
                     },
                     {
                         "content_type": "text",
                         "title": "交換明信片",
-                        "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_POSTCARD"
+                        "payload": "main_button2"
                     },
                     {
                         "content_type": "text",
                         "title": "可愛寵物影片推播",
-                        "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_MOVIE"
+                        "payload": "main_button3"
                     },
                     {
                         "content_type": "text",
                         "title": "領養資訊搜尋",
-                        "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ADOPTION"
+                        "payload": "main_button4"
                     },
                     {
                         "content_type": "text",
                         "title": "民間送養資訊搜尋",
-                        "payload": "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ADOPTION"
+                        "payload": "main_button5"
                     }
                 ]
             }
@@ -136,6 +136,38 @@ def json_subscription(recipient_id):
                             "type": "postback",
                             "title": u"否",
                             "payload": "subscription_no"
+                        }
+                    ]
+                }
+            }
+        }
+    })
+    sendtofb(data)
+
+
+def json_ask_reply_mail(recipient_id):
+    log("sending  json_ask_reply_mail to {recipient}".format(
+        recipient=recipient_id))
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": u"請問您要回信嗎？",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": u"是",
+                            "payload": "reply_yes"
+                        },
+                        {
+                            "type": "postback",
+                            "title": u"否",
+                            "payload": "reply_no"
                         }
                     ]
                 }

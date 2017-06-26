@@ -1,11 +1,11 @@
 # coding=utf-8
 
-from ..json_fb import typingon_json, json_message
+from ..json_fb import typingon_json, json_message, json_photo
 from chat import chat
 from adopt.adopt import crawler, crawler2
 from adopt.search1 import json_city, json_searchdogcat, json_searchbodytype
 from adopt.search2 import json_location2, json_city2
-from db import upload_db_photo_url, upload_db_intro, get_flag
+from db import upload_db_photo_url, upload_db_intro, get_flag, get_reci_id
 from imgur import upload_photo
 
 
@@ -55,12 +55,29 @@ def message_control(messaging_event, sender_id):
                 searchlist = messaging_event[
                     "message"]["quick_reply"]["payload"]
                 crawler(sender_id, searchlist)
-    elif "attachments" in messaging_event["message"] and get_flag(sender_id) == 2:
-        for attachment in messaging_event["message"]["attachments"]:
-            url = attachment["payload"]["url"]
-        url = upload_photo(url)
-        upload_db_photo_url(url, sender_id)
-        json_message(sender_id, "已收到圖片")
-        json_message(sender_id, "請輸入簡單的明信片內容，給未知的寵物愛好者吧\n 例如")
-        json_message(sender_id, "這是我家的可愛小狗，叫作蛋黃，他的尾巴超可愛的 對吧~")
-        # 待補
+        elif get_flag(sender_id) == 6:
+            reci_id = get_reci_id(sender_id)
+            if get_flag(reci_id) == 6:
+                json_message(reci_id, message_text)
+            else:
+                print u"之後再說，可能要建資料庫存信件"
+
+    elif "attachments" in messaging_event["message"]:
+        if get_flag(sender_id) == 2:
+            for attachment in messaging_event["message"]["attachments"]:
+                url = attachment["payload"]["url"]
+            url = upload_photo(url)
+            upload_db_photo_url(url, sender_id)
+            json_message(sender_id, "已收到圖片")
+            json_message(sender_id, "請輸入簡單的明信片內容，給未知的寵物愛好者吧\n 例如")
+            json_message(sender_id, "這是我家的可愛小狗，叫作蛋黃，他的尾巴超可愛的 對吧~")
+            # 待補
+        elif get_flag(sender_id) == 6:
+            for attachment in messaging_event["message"]["attachments"]:
+                url = attachment["payload"]["url"]
+            url = upload_photo(url)
+            reci_id = get_reci_id(sender_id)
+            if get_flag(reci_id) == 6:
+                json_photo(reci_id, url)
+            else:
+                print u"之後再說嗚嗚"
