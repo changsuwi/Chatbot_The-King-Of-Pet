@@ -4,7 +4,7 @@ Created on Wed May 03 16:02:42 2017
 
 @author: vic
 """
-from json_fb import json_message
+from ..json_fb import json_message
 
 def chat(sender_id,message_text):
     if((u"領養" in message_text ) and ((u"狗" in message_text or u"貓" in message_text or u"寵物" in message_text)) and ((u"準備" in message_text or u"條件" in message_text or u"注意" in message_text))):
