@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from json_fb import json_mainbutton, json_message, json_photo, json_subscription
-from search1 import json_location
-from search2 import json_choosedogcat2
+from ..json_fb import json_mainbutton, json_message, json_photo, json_subscription
+from adopt.search1 import json_location
+from adopt.search2 import json_choosedogcat2
 from video import deal_video
 from db import upload_flag, get_mail, get_video, first_use, deal_subscription
 

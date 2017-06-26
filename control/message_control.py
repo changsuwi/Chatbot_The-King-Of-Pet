@@ -1,10 +1,10 @@
 # coding=utf-8
 
-from json_fb import typingon_json, json_message
+from ..json_fb import typingon_json, json_message
 from chat import chat
-from adopt import crawler, crawler2
-from search1 import json_city, json_searchdogcat, json_searchbodytype
-from search2 import json_location2, json_city2
+from adopt.adopt import crawler, crawler2
+from adopt.search1 import json_city, json_searchdogcat, json_searchbodytype
+from adopt.search2 import json_location2, json_city2
 from db import upload_db_photo_url, upload_db_intro, get_flag
 from imgur import upload_photo
 

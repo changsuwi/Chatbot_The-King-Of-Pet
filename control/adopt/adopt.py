@@ -6,8 +6,8 @@ crawler 主要是兩種爬蟲引擎
 """
 import requests
 import json
-from json_fb import json_message, json_template, json_mainbutton
-from sendtofb_log import sendtofb
+from ...json_fb import json_message, json_template, json_mainbutton
+from ...sendtofb_log import sendtofb
 from bs4 import BeautifulSoup
 
 
