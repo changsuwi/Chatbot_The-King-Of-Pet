@@ -58,7 +58,7 @@ def message_control(messaging_event, sender_id):
         elif get_flag(sender_id) == 6:
             reci_id = get_reci_id(sender_id)
             if get_flag(reci_id) == 6:
-                json_message(reci_id, message_text)
+                json_message(reci_id, message_text.encode('utf-8'))
             else:
                 print u"之後再說，可能要建資料庫存信件"
 
