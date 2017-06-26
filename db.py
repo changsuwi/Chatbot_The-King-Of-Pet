@@ -68,3 +68,26 @@ def get_video():
         video_list.append(video)
     return video_list
 
+
+def deal_subscription(sender_id, mode):
+    Subscription = db['subscription']
+    query = {'ID': sender_id}
+    if mode == 0:
+        if Subscription.count(query) == 0:
+            SEED_DATA = {
+                'ID': sender_id,
+                'subscription': 0
+            }
+            Subscription.insert_one(SEED_DATA)
+        else:
+            Subscription.update(query, {'$set': {'subscription': 0}})
+
+    else:
+        if Subscription.count(query) == 0:
+            SEED_DATA = {
+                'ID': sender_id,
+                'subscription': 1
+            }
+            Subscription.insert_one(SEED_DATA)
+        else:
+            Subscription.update(query, {'$set': {'subscription': 1}})

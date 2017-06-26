@@ -7,7 +7,7 @@ from search1 import json_location, json_city, json_searchdogcat, json_searchbody
 from search2 import json_choosedogcat2, json_location2, json_city2
 from imgur import upload_photo
 from video import deal_video
-from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag, get_mail, get_video
+from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag, get_mail, get_video, deal_subscription
 import os
 
 
@@ -126,12 +126,15 @@ def webhook():
                     elif messaging_event["postback"]["payload"] == 'main_button5':
                         upload_flag(5, sender_id)
                         json_choosedogcat2(sender_id)
-                    if messaging_event['postback']['payload'] == 'get_match_mail':
+                    elif messaging_event['postback']['payload'] == 'get_match_mail':
                         mail = get_mail(sender_id)
                         intro = mail['intro']
                         img_url = mail['url']
                         json_photo(sender_id, img_url)
                         json_message(sender_id, intro.encode('utf-8'))
+                    elif messaging_event['postback']['payload'] == 'subscription_yes':
+                        deal_subscription(sender_id, 1)
+                        json_message(sender_id, "訂閱完成")
 
     return "ok", 200
 
