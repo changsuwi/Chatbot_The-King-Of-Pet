@@ -1,7 +1,7 @@
 # coding=utf-8
 from sendtofb_log import log
-from control.message_control import message_control
-from control.postback_control import postback_control
+from lib.control.message_control import message_control
+from lib.control.postback_control import postback_control
 import os
 from flask import Flask, request
 
