@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from json_fb import typingon_json, json_message
 from chat import chat
 from adopt import crawler, crawler2

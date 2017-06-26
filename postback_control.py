@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from json_fb import json_mainbutton, json_message, json_photo, json_subscription
 from search1 import json_location
 from search2 import json_choosedogcat2
