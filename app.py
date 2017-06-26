@@ -1,5 +1,5 @@
 # coding=utf-8
-from sendtofb_log import log
+from lib.sendtofb_log import log
 from lib.control.message_control import message_control
 from lib.control.postback_control import postback_control
 import os
