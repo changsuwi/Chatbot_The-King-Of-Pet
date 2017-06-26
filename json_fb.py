@@ -111,3 +111,35 @@ def json_message(recipient_id, message_text):  # construct message json
         }
     })
     sendtofb(data)
+
+
+def json_subscription(recipient_id):
+    log("sending  json_subscription to {recipient}".format(
+        recipient=recipient_id))
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": u"請問您是否要訂閱呢？ 訂閱可以在每天的固定時間接收新的可愛寵物影片呦",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": u"是",
+                            "payload": "subscription_yes"
+                        },
+                        {
+                            "type": "postback",
+                            "title": u"否",
+                            "payload": "subscription_no"
+                        }
+                    ]
+                }
+            }
+        }
+    })
+    sendtofb(data)

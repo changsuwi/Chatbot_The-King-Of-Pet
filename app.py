@@ -1,6 +1,6 @@
 # coding=utf-8
 from sendtofb_log import log
-from json_fb import typingon_json, json_mainbutton, json_message, json_photo
+from json_fb import typingon_json, json_mainbutton, json_message, json_photo, json_subscription
 from chat import chat
 from adopt import crawler, crawler2
 from search1 import json_location, json_city, json_searchdogcat, json_searchbodytype
@@ -46,7 +46,7 @@ def webhook():
                         message_text = messaging_event["message"][
                             "text"]  # the message's text
                         print(sender_id)  # test
-                        
+
                         if(get_flag(sender_id) == 1):
                             chat(sender_id, message_text)
                         elif(get_flag(sender_id) == 2):
@@ -119,6 +119,7 @@ def webhook():
                         upload_flag(3, sender_id)
                         videos = get_video()
                         deal_video(sender_id, videos)
+                        json_subscription(sender_id)
                     elif messaging_event["postback"]["payload"] == 'main_button4':
                         upload_flag(4, sender_id)
                         json_location(sender_id)
