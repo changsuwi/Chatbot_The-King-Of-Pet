@@ -7,7 +7,7 @@ from search1 import json_location, json_city, json_searchdogcat, json_searchbody
 from search2 import json_choosedogcat2, json_location2, json_city2
 from imgur import upload_photo
 from video import deal_video
-from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag, get_mail, get_video, deal_subscription
+from db import upload_db_photo_url, upload_db_intro, upload_flag, get_flag, get_mail, get_video, first_use, deal_subscription
 import os
 
 
@@ -119,7 +119,8 @@ def webhook():
                         upload_flag(3, sender_id)
                         videos = get_video()
                         deal_video(sender_id, videos)
-                        json_subscription(sender_id)
+                        if first_use(sender_id, 3) == 1:
+                            json_subscription(sender_id)
                     elif messaging_event["postback"]["payload"] == 'main_button4':
                         upload_flag(4, sender_id)
                         json_location(sender_id)
@@ -135,6 +136,10 @@ def webhook():
                     elif messaging_event['postback']['payload'] == 'subscription_yes':
                         deal_subscription(sender_id, 1)
                         json_message(sender_id, "訂閱完成")
+                    elif messaging_event['postback']['payload'] == 'subscription_no':
+                        deal_subscription(sender_id, 0)
+                        json_message(
+                            sender_id, "好的，若未來有需要訂閱，點選\n工作列->\n可愛動物影片推播->\n訂閱功能")
 
     return "ok", 200
 

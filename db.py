@@ -69,6 +69,16 @@ def get_video():
     return video_list
 
 
+def first_use(sender_id, mode):
+    query = {'ID': sender_id}
+    if mode == 3:
+        Subscription = db['subscription']
+        if Subscription.count(query) == 0:
+            return 1
+        else:
+            return 0
+
+
 def deal_subscription(sender_id, mode):
     Subscription = db['subscription']
     query = {'ID': sender_id}
