@@ -1,6 +1,6 @@
-from json_fb import json_template
+from ..json_fb import json_template
 import json
-from sendtofb_log import sendtofb
+from ..sendtofb_log import sendtofb
 
 
 def deal_video(recipient_id, videos):
