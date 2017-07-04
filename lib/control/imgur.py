@@ -14,14 +14,12 @@ def upload_photo(image_url):
     access_token = '3827abdb987541f4e5d7831cfa91f64b838d6fcf'
     refresh_token = '1df2672c250d33d5823ddf7d7a1d34ffbca0b2fc'
     client = ImgurClient(client_id, client_secret, access_token, refresh_token)
-    album = None # You can also enter an album ID here
+    album = None  # You can also enter an album ID here
     config = {
-		'album': album,
-	}
+        'album': album,
+    }
 
     print("Uploading image... ")
     image = client.upload_from_url(image_url, config=config, anon=False)
-    print("Done")    
+    print("Done")
     return image['link']
-
-
