@@ -60,7 +60,8 @@ def message_control(messaging_event, sender_id):
             if get_flag(reci_id) == 6:
                 json_message(reci_id, message_text.encode('utf-8'))
             else:
-                print u"之後再說，可能要建資料庫存信件"
+                message_text = message_text + '\nby postcard'
+                json_message(reci_id, message_text.encode('utf-8'))
 
     elif "attachments" in messaging_event["message"]:
         if get_flag(sender_id) == 2:
@@ -80,4 +81,6 @@ def message_control(messaging_event, sender_id):
             if get_flag(reci_id) == 6:
                 json_photo(reci_id, url)
             else:
-                print u"之後再說嗚嗚"
+                json_photo(reci_id, url)
+                message_text = 'by postcard'
+                json_message(reci_id, message_text.encode('utf-8'))
