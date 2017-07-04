@@ -16,10 +16,10 @@ def postback_control(messaging_event, sender_id):
     elif messaging_event["postback"]["payload"] == 'main_button1':
         upload_flag(1, sender_id)
         json_message(
-            sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
+            sender_id, "現在是寵物顧問模式\n我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
     elif messaging_event["postback"]["payload"] == 'main_button2':
         upload_flag(2, sender_id)
-        json_message(sender_id, "請先傳送一張寵物的可愛照吧~")
+        json_message(sender_id, "現在是交換明信片模式\n請先傳送一張寵物的可愛照吧~")
     elif messaging_event["postback"]["payload"] == 'main_button3':
         upload_flag(3, sender_id)
         videos = get_video()
@@ -32,6 +32,9 @@ def postback_control(messaging_event, sender_id):
     elif messaging_event["postback"]["payload"] == 'main_button5':
         upload_flag(5, sender_id)
         json_choosedogcat2(sender_id)
+    elif messaging_event["postback"]["payload"] == 'main_button6':
+        upload_flag(6, sender_id)
+        json_message(sender_id, "現在是寄送明信片模式\n輸入想說的話，本汪就會幫你寄過去的呦")
     elif messaging_event['postback']['payload'] == 'get_match_mail':
         mail = get_mail(sender_id)
         intro = mail['intro']
