@@ -3,7 +3,7 @@
 
 import pymongo
 import random
-
+from ..json_fb import json_match
 #  Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
 uri = 'mongodb://vic010744:vic32823@ds135700.mlab.com:35700/heroku_4w25h5pt'
@@ -49,6 +49,23 @@ def upload_db_intro(text, sender_id):
     Postcard.update(
         query, {'$set': {'intro': text, 'match': '0', 'match_id': "None"}})
     client.close()
+
+
+def match(sender_id):
+    Postcard = db['postcard']
+    target = Postcard.find_one({'match': '0'})
+    for item in target:
+        if(item['ID'] != sender_id):
+            query = {'ID': item['ID']}
+            Postcard.update(
+                query, {'$set':
+                        {'match': '1', 'match_id': sender_id}})
+            json_match(item['ID'])
+            query = {'ID': sender_id}
+            Postcard.update(
+                query, {'$set':
+                        {'match': '1', 'match_id': item['ID']}})
+            json_match(sender_id)
 
 
 def get_mail(sender_id):

@@ -5,7 +5,8 @@ from chat import chat
 from adopt.adopt import crawler, crawler2
 from adopt.search1 import json_city, json_searchdogcat, json_searchbodytype
 from adopt.search2 import json_location2, json_city2
-from db import upload_db_photo_url, upload_db_intro, get_flag, get_reci_id
+from db import upload_db_photo_url, upload_db_intro, match
+from db import get_flag, get_reci_id
 from imgur import upload_photo
 
 
@@ -20,6 +21,7 @@ def message_control(messaging_event, sender_id):
         elif(get_flag(sender_id) == 2):
             upload_db_intro(message_text, sender_id)
             json_message(sender_id, "已完成，請耐心等待神秘的明信片")
+            match(sender_id)
         elif(get_flag(sender_id) == 4 or
              get_flag(sender_id) == 5):
             '''

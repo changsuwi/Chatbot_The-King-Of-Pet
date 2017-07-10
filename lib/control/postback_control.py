@@ -34,7 +34,7 @@ def postback_control(messaging_event, sender_id):
         json_choosedogcat2(sender_id)
     elif messaging_event["postback"]["payload"] == 'main_button6':
         upload_flag(6, sender_id)
-        json_message(sender_id, "現在是寄送明信片模式\n輸入想說的話，本汪就會幫你寄過去的呦")
+        json_message(sender_id, "開始寫一封新的明信片給未知的寵物好友吧～\n輸入想說的話，本汪就會幫你寄過去的呦")
     elif messaging_event['postback']['payload'] == 'get_match_mail':
         user_mail = get_mail(sender_id)
         friend_mail = get_mail(user_mail['match_id'])

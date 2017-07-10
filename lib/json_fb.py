@@ -145,6 +145,32 @@ def json_subscription(recipient_id):
     sendtofb(data)
 
 
+def json_match(recipient_id):
+    log("sending  match mail to {recipient}".format(recipient=recipient_id))
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": u"主人，本汪剛剛在門口咬到一封明信片XDD",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": u"前往查看",
+                            "payload": "get_match_mail"
+                        }
+                    ]
+                }
+            }
+        }
+    })
+    sendtofb(data)
+
+
 def json_ask_reply_mail(recipient_id):
     log("sending  json_ask_reply_mail to {recipient}".format(
         recipient=recipient_id))
