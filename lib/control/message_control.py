@@ -1,12 +1,12 @@
 # coding=utf-8
 
 from ..json_fb import typingon_json, json_message, json_photo
-from ..json_fb import json_subscription, json_choosedogcat2
+from ..json_fb import json_subscription
 from chat import chat
 from adopt.adopt import crawler, crawler2
 from adopt.search1 import json_city, json_searchdogcat, json_searchbodytype
 from adopt.search1 import json_location
-from adopt.search2 import json_location2, json_city2
+from adopt.search2 import json_location2, json_city2, json_choosedogcat2
 from db import upload_db_photo_url, upload_db_intro, match, get_video
 from db import get_flag, get_reci_id, upload_flag, first_use
 from video import deal_video
