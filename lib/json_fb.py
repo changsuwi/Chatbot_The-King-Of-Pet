@@ -46,7 +46,7 @@ def json_mainbutton(recipient_id):
             },
             "message":
             {
-                "text": "汪汪，我是聊天機器狗汪汪，我很聰明的，我可以做很多事:",
+                "text": "你要選擇哪個呢？",
                 "quick_replies": [
                     {
                         "content_type": "text",

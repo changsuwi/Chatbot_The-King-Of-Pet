@@ -11,7 +11,12 @@ from db import upload_flag, get_mail, get_video, first_use, deal_subscription
 def postback_control(messaging_event, sender_id):
     if messaging_event["postback"]["payload"] == 'GET_STARTED_PAYLOAD':
         upload_flag(0, sender_id)
-        json_message(sender_id, "汪汪")
+        json_message(sender_id, "汪汪，我是聊天機器狗～～我會做很多事喔")
+        json_message(sender_id, "聊天：可以問我寵物問題，我會給你解答的～")
+        json_message(sender_id, "交換明信片：用明信片來認識愛寵物的新朋友吧～")
+        json_message(sender_id, "可愛寵物影片推播：幫你找可愛的寵物影片")
+        json_message(sender_id, "領養資訊搜尋：找收容所的領養資訊")
+        json_message(sender_id, "送養資搜尋：找民間送養的資訊")
         json_mainbutton(sender_id)
     elif messaging_event["postback"]["payload"] == 'main_button1':
         upload_flag(1, sender_id)
@@ -19,7 +24,7 @@ def postback_control(messaging_event, sender_id):
             sender_id, "現在是寵物顧問模式\n我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
     elif messaging_event["postback"]["payload"] == 'main_button2':
         upload_flag(2, sender_id)
-        json_message(sender_id, "現在是交換明信片模式\n請先傳送一張寵物的可愛照吧~")
+        json_message(sender_id, "開始寫一封新的明信片給未知的寵物好友吧～\n請先傳送一張寵物的可愛照吧~")
     elif messaging_event["postback"]["payload"] == 'main_button3':
         upload_flag(3, sender_id)
         videos = get_video()
@@ -34,7 +39,7 @@ def postback_control(messaging_event, sender_id):
         json_choosedogcat2(sender_id)
     elif messaging_event["postback"]["payload"] == 'main_button6':
         upload_flag(6, sender_id)
-        json_message(sender_id, "開始寫一封新的明信片給未知的寵物好友吧～\n輸入想說的話，本汪就會幫你寄過去的呦")
+        json_message(sender_id, "輸入想說的話，本汪就會幫你寄過去的呦")
     elif messaging_event['postback']['payload'] == 'get_match_mail':
         user_mail = get_mail(sender_id)
         friend_mail = get_mail(user_mail['match_id'])
