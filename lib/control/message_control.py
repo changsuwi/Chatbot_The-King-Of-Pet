@@ -1,12 +1,15 @@
 # coding=utf-8
 
 from ..json_fb import typingon_json, json_message, json_photo
+from ..json_fb import json_subscription, json_location
+from ..json_fb import json_choosedogcat2
 from chat import chat
 from adopt.adopt import crawler, crawler2
 from adopt.search1 import json_city, json_searchdogcat, json_searchbodytype
 from adopt.search2 import json_location2, json_city2
-from db import upload_db_photo_url, upload_db_intro, match
-from db import get_flag, get_reci_id
+from db import upload_db_photo_url, upload_db_intro, match, get_video
+from db import get_flag, get_reci_id, upload_flag, first_use
+from video import deal_video
 from imgur import upload_photo
 
 
@@ -15,8 +18,27 @@ def message_control(messaging_event, sender_id):
         message_text = messaging_event["message"][
             "text"]  # the message's text
         print(sender_id)  # test
-
-        if(get_flag(sender_id) == 1):
+        if get_flag(sender_id) == 0:
+            if message_text == '聊天':
+                upload_flag(1, sender_id)
+                json_message(
+                    sender_id, "現在是寵物顧問模式\n我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
+            elif message_text == '交換明信片':
+                upload_flag(2, sender_id)
+                json_message(sender_id, "現在是交換明信片模式\n請先傳送一張寵物的可愛照吧~")
+            elif message_text == '可愛寵物影片推播':
+                upload_flag(3, sender_id)
+                videos = get_video()
+                deal_video(sender_id, videos)
+                if first_use(sender_id, 3) == 1:
+                    json_subscription(sender_id)
+            elif message_text == '領養資訊搜尋':
+                upload_flag(4, sender_id)
+                json_location(sender_id)
+            elif message_text == '民間送養資訊搜尋':
+                upload_flag(5, sender_id)
+                json_choosedogcat2(sender_id)
+        elif(get_flag(sender_id) == 1):
             chat(sender_id, message_text)
         elif(get_flag(sender_id) == 2):
             upload_db_intro(message_text, sender_id)
