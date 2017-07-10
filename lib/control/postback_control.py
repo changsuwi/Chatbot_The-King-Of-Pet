@@ -36,9 +36,10 @@ def postback_control(messaging_event, sender_id):
         upload_flag(6, sender_id)
         json_message(sender_id, "現在是寄送明信片模式\n輸入想說的話，本汪就會幫你寄過去的呦")
     elif messaging_event['postback']['payload'] == 'get_match_mail':
-        mail = get_mail(sender_id)
-        intro = mail['intro']
-        img_url = mail['url']
+        user_mail = get_mail(sender_id)
+        friend_mail = get_mail(user_mail['match_id'])
+        intro = friend_mail['intro']
+        img_url = friend_mail['url']
         json_photo(sender_id, img_url)
         json_message(sender_id, intro.encode('utf-8'))
         json_ask_reply_mail(sender_id)
