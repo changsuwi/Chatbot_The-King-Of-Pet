@@ -18,26 +18,25 @@ def message_control(messaging_event, sender_id):
         message_text = messaging_event["message"][
             "text"]  # the message's text
         print(sender_id)  # test
-        if get_flag(sender_id) == 0:
-            if message_text == u'聊天':
-                upload_flag(1, sender_id)
-                json_message(
-                    sender_id, "現在是寵物顧問模式\n我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
-            elif message_text == u'交換明信片':
-                upload_flag(2, sender_id)
-                json_message(sender_id, "現在是交換明信片模式\n請先傳送一張寵物的可愛照吧~")
-            elif message_text == u'可愛寵物影片推播':
-                upload_flag(3, sender_id)
-                videos = get_video()
-                deal_video(sender_id, videos)
-                if first_use(sender_id, 3) == 1:
-                    json_subscription(sender_id)
-            elif message_text == u'領養資訊搜尋':
-                upload_flag(4, sender_id)
-                json_location(sender_id)
-            elif message_text == u'民間送養資訊搜尋':
-                upload_flag(5, sender_id)
-                json_choosedogcat2(sender_id)
+        if message_text == u'聊天':
+            upload_flag(1, sender_id)
+            json_message(
+                sender_id, "現在是寵物顧問模式\n我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
+        elif message_text == u'交換明信片':
+            upload_flag(2, sender_id)
+            json_message(sender_id, "現在是交換明信片模式\n請先傳送一張寵物的可愛照吧~")
+        elif message_text == u'可愛寵物影片推播':
+            upload_flag(3, sender_id)
+            videos = get_video()
+            deal_video(sender_id, videos)
+            if first_use(sender_id, 3) == 1:
+                json_subscription(sender_id)
+        elif message_text == u'領養資訊搜尋':
+            upload_flag(4, sender_id)
+            json_location(sender_id)
+        elif message_text == u'民間送養資訊搜尋':
+            upload_flag(5, sender_id)
+            json_choosedogcat2(sender_id)
         elif(get_flag(sender_id) == 1):
             chat(sender_id, message_text)
         elif(get_flag(sender_id) == 2):
