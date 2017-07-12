@@ -53,7 +53,7 @@ def upload_db_intro(text, sender_id):
 
 def match(sender_id):
     Postcard = db['postcard']
-    target = Postcard.find_one({'match': '0'})
+    target = Postcard.find({'match': '0'})
     for item in target:
         if(item['ID'] != sender_id):
             query = {'ID': item['ID']}
