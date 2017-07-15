@@ -92,6 +92,8 @@ def crawler2(sender_id, searchlist):
         # find new imformation,so add this in the template
         template = add_template2(
             template, title, country, name, age, look, item_url, image_url)
+        if count >= 7:
+            break
 
     if(count == 0):  # if number==0 can not find any animal
         json_message(sender_id, "嗚嗚嗚不好意思，找不到相對應的結果汪汪")
