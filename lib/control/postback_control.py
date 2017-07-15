@@ -16,7 +16,7 @@ def postback_control(messaging_event, sender_id):
         json_message(sender_id, "交換明信片：用明信片來認識愛寵物的新朋友吧～")
         json_message(sender_id, "可愛寵物影片推播：幫你找可愛的寵物影片")
         json_message(sender_id, "領養資訊搜尋：找收容所的領養資訊")
-        json_message(sender_id, "送養資搜尋：找民間送養的資訊")
+        json_message(sender_id, "送養資訊搜尋：找民間送養的資訊")
         json_mainbutton(sender_id)
     elif messaging_event["postback"]["payload"] == 'main_button1':
         upload_flag(1, sender_id)
