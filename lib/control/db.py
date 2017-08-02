@@ -48,7 +48,7 @@ def upload_db_photo_url(url, sender_id):
     # new postcard
     else:
         Postcard.update(
-            query, {'$set': {'url': url, 'match_id': 'None', match: '0'}})
+            query, {'$set': {'match_id': 'None', match: '0'}})
         target_id = get_reci_id(sender_id)
         query = {'ID': target_id}
         # 未來可能新增提示訊息給使用者，讓使用者知道已無配對
