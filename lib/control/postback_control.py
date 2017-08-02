@@ -1,11 +1,12 @@
 # coding=utf-8
 
 from ..json_fb import json_mainbutton, json_message, json_photo
-from ..json_fb import json_subscription, json_ask_reply_mail
+from ..json_fb import json_subscription, json_ask_reply_mail, json_del_friend
 from adopt.search1 import json_location
 from adopt.search2 import json_choosedogcat2
 from video import deal_video
 from db import upload_flag, get_mail, get_video, first_use, deal_subscription
+from db import del_friend
 
 
 def postback_control(messaging_event, sender_id):
@@ -45,6 +46,10 @@ def postback_control(messaging_event, sender_id):
     elif messaging_event["postback"]["payload"] == 'main_button6':
         upload_flag(6, sender_id)
         json_message(sender_id, "點選傳送訊息，輸入想說的話或圖片，本汪就會幫你寄過去的呦")
+    elif messaging_event["postback"]["payload"] == 'main_button7':
+        upload_flag(7, sender_id)
+        json_message(sender_id, "若刪除明信片好友，未來將無法與該位好友取得聯繫")
+        json_del_friend(sender_id)
     elif messaging_event['postback']['payload'] == 'get_match_mail':
         user_mail = get_mail(sender_id)
         friend_mail = get_mail(user_mail['match_id'])
@@ -66,6 +71,9 @@ def postback_control(messaging_event, sender_id):
         json_message(
             sender_id, "若不想與對方聊天了，點選斷絕往來即可，了解了嗎？")
         json_message(
-            sender_id, "那麼本汪已準備好，幫你寄信拉～ 不管是文字 圖片 都交給本汪吧")
+            sender_id, "那麼本汪已準備好，幫你寄信拉～ 現在只要輸入想說的話，都會傳送到對方那喔")
 
         upload_flag(6, sender_id)
+    elif messaging_event['postback']['payload'] == 'del_yes':
+        del_friend(sender_id)
+        json_message(sender_id, "已刪除，若想交換新明信片認識好友，請再點選\n功能->交換新明信片")

@@ -201,3 +201,35 @@ def json_ask_reply_mail(recipient_id):
         }
     })
     sendtofb(data)
+
+
+def json_del_friend(recipient_id):
+    log("sending  json_del_friend to {recipient}".format(
+        recipient=recipient_id))
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": u"請問您要刪除明信片好友嗎？",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": u"是",
+                            "payload": "del_yes"
+                        },
+                        {
+                            "type": "postback",
+                            "title": u"否",
+                            "payload": "del_no"
+                        }
+                    ]
+                }
+            }
+        }
+    })
+    sendtofb(data)

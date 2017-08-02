@@ -33,6 +33,7 @@ def get_flag(sender_id):
 def upload_db_photo_url(url, sender_id):
     Postcard = db['postcard']
     query = {'ID': sender_id}
+    # first use
     if(Postcard.count(query) == 0):
         SEED_DATA = {
             'url': url,
@@ -42,11 +43,13 @@ def upload_db_photo_url(url, sender_id):
             'match_id': "None"
         }
         print Postcard.insert_one(SEED_DATA)
+    # user has used
+    # 未來新增選項讓使用者選擇是否要用新明信片 或是沿用舊的
+    # new postcard
     else:
         Postcard.update(
             query, {'$set': {'url': url, 'match_id': 'None', match: '0'}})
-        user_data = Postcard.find_one(query)
-        target_id = user_data['match_id']
+        target_id = get_reci_id(sender_id)
         query = {'ID': target_id}
         # 未來可能新增提示訊息給使用者，讓使用者知道已無配對
         Postcard.update(
@@ -135,3 +138,12 @@ def get_reci_id(sender_id):
     query = {'ID': sender_id}
     data = Postcard.find_one(query)
     return data['match_id']
+
+
+def del_friend(sender_id):
+    Postcard = db['postcard']
+    target_id = get_reci_id(sender_id)
+    Postcard.update({'ID': target_id}, {
+                    '$set': {'match': '0', 'match_id': 'None'}})
+    Postcard.update({'ID': sender_id}, {
+                    '$set': {'match': '0', 'match_id': 'None'}})
