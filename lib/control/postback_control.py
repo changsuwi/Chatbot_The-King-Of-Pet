@@ -72,8 +72,13 @@ def postback_control(messaging_event, sender_id):
             sender_id, "若不想與對方聊天了，點選斷絕往來即可，了解了嗎？")
         json_message(
             sender_id, "那麼本汪已準備好，幫你寄信拉～ 現在只要輸入想說的話，都會傳送到對方那喔")
-
-        upload_flag(6, sender_id)
+    elif messaging_event['postback']['payload'] == 'reply_no':
+        json_message(
+            sender_id, "好的，若未來想要聊天時，只要點選\n功能表-->\n與明信片朋友聊天\n就可以傳送訊息給明信片朋友喔")
+        upload_flag(0, sender_id)
     elif messaging_event['postback']['payload'] == 'del_yes':
         del_friend(sender_id)
         json_message(sender_id, "已刪除，若想交換新明信片認識好友，請再點選\n功能->交換新明信片")
+    elif messaging_event['postback']['payload'] == 'del_no':
+        del_friend(sender_id)
+        json_message(sender_id, "好的，若未來想刪除，請再點選\n功能表->刪除明信片好友")
