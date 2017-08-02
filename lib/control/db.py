@@ -36,18 +36,28 @@ def upload_db_photo_url(url, sender_id):
     if(Postcard.count(query) == 0):
         SEED_DATA = {
             'url': url,
-            'ID': sender_id
+            'ID': sender_id,
+            'intro': 'None',
+            'match': '0',
+            'match_id': "None"
         }
         print Postcard.insert_one(SEED_DATA)
     else:
-        Postcard.update(query, {'$set': {'url': url}})
+        Postcard.update(
+            query, {'$set': {'url': url, 'match_id': 'None', match: '0'}})
+        user_data = Postcard.find_one(query)
+        target_id = user_data['match_id']
+        query = {'ID': target_id}
+        # 未來可能新增提示訊息給使用者，讓使用者知道已無配對
+        Postcard.update(
+            query, {'$set': {'match_id': 'None', match: '0'}})
 
 
 def upload_db_intro(text, sender_id):
     Postcard = db['postcard']
     query = {'ID': sender_id}
     Postcard.update(
-        query, {'$set': {'intro': text, 'match': '0', 'match_id': "None"}})
+        query, {'$set': {'intro': text}})
     client.close()
 
 
