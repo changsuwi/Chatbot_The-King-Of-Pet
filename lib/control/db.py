@@ -47,9 +47,9 @@ def upload_db_photo_url(url, sender_id):
     # 未來新增選項讓使用者選擇是否要用新明信片 或是沿用舊的
     # new postcard
     else:
+        target_id = get_reci_id(sender_id)
         Postcard.update(query, {
             '$set': {'url': url, 'match': '0', 'match_id': 'None'}})
-        target_id = get_reci_id(sender_id)
         query = {'ID': target_id}
         # 未來可能新增提示訊息給使用者，讓使用者知道已無配對
         Postcard.update(
