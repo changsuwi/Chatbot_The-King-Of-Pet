@@ -6,7 +6,7 @@ from adopt.search1 import json_location
 from adopt.search2 import json_choosedogcat2
 from video import deal_video
 from db import upload_flag, get_mail, get_video, first_use, deal_subscription
-from db import del_friend
+from db import del_friend, get_reci_id
 
 
 def postback_control(messaging_event, sender_id):
@@ -44,6 +44,9 @@ def postback_control(messaging_event, sender_id):
         upload_flag(5, sender_id)
         json_choosedogcat2(sender_id)
     elif messaging_event["postback"]["payload"] == 'main_button6':
+        reci_id = get_reci_id(sender_id)
+        if reci_id == 'None':
+            json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換心明信片')
         upload_flag(6, sender_id)
         json_message(sender_id, "點選傳送訊息，輸入想說的話或圖片，本汪就會幫你寄過去的呦")
     elif messaging_event["postback"]["payload"] == 'main_button7':
