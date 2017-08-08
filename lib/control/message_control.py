@@ -80,12 +80,13 @@ def message_control(messaging_event, sender_id):
                 crawler(sender_id, searchlist)
         elif get_flag(sender_id) == 6:
             reci_id = get_reci_id(sender_id)
-        
-            # if get_flag(reci_id) == 6:
-            #     json_message(reci_id, message_text.encode('utf-8'))
-            # else:
-            #     message_text = message_text + '\nby postcard'
-            #     json_message(reci_id, message_text.encode('utf-8'))
+            if reci_id == 'None':
+                json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換心明信片')
+            elif get_flag(reci_id) == 6:
+                json_message(reci_id, message_text.encode('utf-8'))
+            else:
+                message_text = message_text + '\nby postcard'
+                json_message(reci_id, message_text.encode('utf-8'))
     elif "attachments" in messaging_event["message"]:
         if get_flag(sender_id) == 2:
             for attachment in messaging_event["message"]["attachments"]:
