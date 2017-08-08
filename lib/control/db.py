@@ -3,7 +3,7 @@
 
 import pymongo
 import random
-from ..json_fb import json_match
+from ..json_fb import json_match, json_message
 #  Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
 uri = 'mongodb://vic010744:vic32823@ds135700.mlab.com:35700/heroku_4w25h5pt'
@@ -48,12 +48,13 @@ def upload_db_photo_url(url, sender_id):
     # new postcard
     else:
         target_id = get_reci_id(sender_id)
+        if target_id is not 'None':
+            query = {'ID': target_id}
+            json_message(target_id, '不好意思，您的明信片好友已離開，若需要交換新明信片，請點選功能表內的交換新明信片')
+            Postcard.update(
+                query, {'$set': {'match_id': 'None', 'match': '-1'}})
         Postcard.update(query, {
             '$set': {'url': url, 'match': '0', 'match_id': 'None'}})
-        query = {'ID': target_id}
-        # 未來可能新增提示訊息給使用者，讓使用者知道已無配對
-        Postcard.update(
-            query, {'$set': {'match_id': 'None', 'match': '0'}})
 
 
 def upload_db_intro(text, sender_id):
@@ -143,7 +144,8 @@ def get_reci_id(sender_id):
 def del_friend(sender_id):
     Postcard = db['postcard']
     target_id = get_reci_id(sender_id)
+    json_message(target_id, '不好意思，您的明信片好友已離開，若需要交換新明信片，請點選功能表內的交換新明信片')
     Postcard.update({'ID': target_id}, {
-                    '$set': {'match': '0', 'match_id': 'None'}})
+                    '$set': {'match': '-1', 'match_id': 'None'}})
     Postcard.update({'ID': sender_id}, {
-                    '$set': {'match': '0', 'match_id': 'None'}})
+                    '$set': {'match': '-1', 'match_id': 'None'}})

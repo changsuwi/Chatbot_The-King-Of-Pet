@@ -80,12 +80,12 @@ def message_control(messaging_event, sender_id):
                 crawler(sender_id, searchlist)
         elif get_flag(sender_id) == 6:
             reci_id = get_reci_id(sender_id)
-            if get_flag(reci_id) == 6:
-                json_message(reci_id, message_text.encode('utf-8'))
-            else:
-                message_text = message_text + '\nby postcard'
-                json_message(reci_id, message_text.encode('utf-8'))
-
+        
+            # if get_flag(reci_id) == 6:
+            #     json_message(reci_id, message_text.encode('utf-8'))
+            # else:
+            #     message_text = message_text + '\nby postcard'
+            #     json_message(reci_id, message_text.encode('utf-8'))
     elif "attachments" in messaging_event["message"]:
         if get_flag(sender_id) == 2:
             for attachment in messaging_event["message"]["attachments"]:
