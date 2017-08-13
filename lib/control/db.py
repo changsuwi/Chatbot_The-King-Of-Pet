@@ -49,10 +49,9 @@ def upload_db_photo_url(url, sender_id):
     else:
         target_id = get_reci_id(sender_id)
         if target_id is not 'None':
-            query = {'ID': target_id}
             json_message(target_id, '不好意思，您的明信片好友已離開，若需要交換新明信片，請點選功能表內的交換新明信片')
-            Postcard.update(
-                query, {'$set': {'match_id': 'None', 'match': '-1'}})
+            Postcard.update({'ID': target_id},
+                            {'$set': {'match_id': 'None', 'match': '-1'}})
         Postcard.update(query, {
             '$set': {'url': url, 'match': '0', 'match_id': 'None'}})
 
