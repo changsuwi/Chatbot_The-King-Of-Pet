@@ -3,7 +3,7 @@
 
 import pymongo
 import random
-from ..json_fb import json_match, json_message
+from ..json_fb import json_message, json_photo
 #  Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
 uri = 'mongodb://vic010744:vic32823@ds135700.mlab.com:35700/heroku_4w25h5pt'
@@ -62,6 +62,16 @@ def upload_db_intro(text, sender_id):
     Postcard.update(
         query, {'$set': {'intro': text}})
     client.close()
+
+
+def json_match(recipient_id):
+    json_message(recipient_id, '本汪咬到一封明信片')
+    user_mail = get_mail(recipient_id)
+    friend_mail = get_mail(user_mail['match_id'])
+    intro = friend_mail['intro']
+    img_url = friend_mail['url']
+    json_photo(recipient_id, img_url)
+    json_message(recipient_id, intro.encode('utf-8'))
 
 
 def match(sender_id):

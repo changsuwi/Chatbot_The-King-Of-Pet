@@ -7,7 +7,6 @@ json_fb 此模組主要存放通用的json格式與打包
 """
 from sendtofb_log import sendtofb, log
 import json
-from lib.control.db import get_mail
 
 
 def typingon_json(recipient_id):
@@ -145,7 +144,7 @@ def json_subscription(recipient_id):
     })
     sendtofb(data)
 
-
+'''
 def json_match(recipient_id):
     log("sending  match mail to {recipient}".format(recipient=recipient_id))
     json_message(recipient_id, '本汪咬到一封明信片')
@@ -155,7 +154,7 @@ def json_match(recipient_id):
     img_url = friend_mail['url']
     json_photo(recipient_id, img_url)
     json_message(recipient_id, intro.encode('utf-8'))
-    '''
+    
     data = json.dumps({
         "recipient": {
             "id": recipient_id
