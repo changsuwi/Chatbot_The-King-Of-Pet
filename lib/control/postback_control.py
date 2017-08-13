@@ -28,7 +28,7 @@ def postback_control(messaging_event, sender_id):
     elif messaging_event["postback"]["payload"] == 'main_button2':
         upload_flag(2, sender_id)
         json_message(sender_id, "這是交換寵物明信片的小遊戲，藉由本汪這個郵差，讓您可以藉由明信片認識愛寵物的新朋友")
-        json_message(sender_id, "那麼開始寫一封新的明信片給未知的寵物好友吧～\n請先傳送一張寵物的可愛照吧~")
+        json_message(sender_id, "點擊傳送訊息，然後傳送一張照片")
     elif messaging_event["postback"]["payload"] == 'main_button3':
         upload_flag(3, sender_id)
         videos = get_video()
@@ -46,9 +46,10 @@ def postback_control(messaging_event, sender_id):
     elif messaging_event["postback"]["payload"] == 'main_button6':
         reci_id = get_reci_id(sender_id)
         if reci_id == 'None':
-            json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換心明信片')
-        upload_flag(6, sender_id)
-        json_message(sender_id, "點選傳送訊息，輸入想說的話或圖片，本汪就會幫你寄過去的呦")
+            json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換新明信片')
+        else:
+            upload_flag(6, sender_id)
+            json_message(sender_id, "點選傳送訊息，輸入想說的話或圖片，本汪就會幫你寄過去的呦")
     elif messaging_event["postback"]["payload"] == 'main_button7':
         upload_flag(7, sender_id)
         json_message(sender_id, "若刪除明信片好友，未來將無法與該位好友取得聯繫")

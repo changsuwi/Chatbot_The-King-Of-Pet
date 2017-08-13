@@ -21,10 +21,12 @@ def message_control(messaging_event, sender_id):
         if message_text == u'聊天':
             upload_flag(1, sender_id)
             json_message(
-                sender_id, "現在是寵物顧問模式\n我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
-        elif message_text == u'交換明信片':
+                sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
+        elif message_text == u'交換新明信片':
             upload_flag(2, sender_id)
-            json_message(sender_id, "現在是交換明信片模式\n請先傳送一張寵物的可愛照吧~")
+            json_message(
+                sender_id, "這是交換寵物明信片的小遊戲，藉由本汪這個郵差，讓您可以藉由明信片認識愛寵物的新朋友")
+            json_message(sender_id, "點擊傳送訊息，然後傳送一張照片")
         elif message_text == u'可愛寵物影片推播':
             upload_flag(3, sender_id)
             videos = get_video()
