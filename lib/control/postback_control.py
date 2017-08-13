@@ -69,6 +69,7 @@ def postback_control(messaging_event, sender_id):
         deal_subscription(sender_id, 0)
         json_message(
             sender_id, "好的，若未來有需要訂閱，點選\n工作列->\n可愛動物影片推播->\n訂閱功能")
+    '''
     elif messaging_event['postback']['payload'] == 'reply_yes':
         json_message(
             sender_id, "未來只要點選\n功能表-->\n與明信片朋友聊天\n就可以傳送訊息給明信片朋友喔")
@@ -80,6 +81,7 @@ def postback_control(messaging_event, sender_id):
         json_message(
             sender_id, "好的，若未來想要聊天時，只要點選\n功能表-->\n與明信片朋友聊天\n就可以傳送訊息給明信片朋友喔")
         upload_flag(0, sender_id)
+    '''
     elif messaging_event['postback']['payload'] == 'del_yes':
         del_friend(sender_id)
         json_message(sender_id, "已刪除，若想交換新明信片認識好友，請再點選\n功能->交換新明信片")

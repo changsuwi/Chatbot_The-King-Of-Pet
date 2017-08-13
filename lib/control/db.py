@@ -65,13 +65,18 @@ def upload_db_intro(text, sender_id):
 
 
 def json_match(recipient_id):
-    json_message(recipient_id, '本汪咬到一封明信片')
+    upload_flag(6, recipient_id)
+    json_message(recipient_id, '本汪咬到一封明信片，內容如下')
     user_mail = get_mail(recipient_id)
     friend_mail = get_mail(user_mail['match_id'])
     intro = friend_mail['intro']
     img_url = friend_mail['url']
     json_photo(recipient_id, img_url)
     json_message(recipient_id, intro.encode('utf-8'))
+    json_message(
+        recipient_id, "現在只要傳送訊息，都會傳送到對方那喔")
+    json_message(
+        recipient_id, "若不想與對方聊天了，點開功能表->刪除明信片好友即可")
 
 
 def match(sender_id):
