@@ -7,7 +7,7 @@ json_fb 此模組主要存放通用的json格式與打包
 """
 from sendtofb_log import sendtofb, log
 import json
-from control.db import get_mail
+from lib.control.db import get_mail
 
 
 def typingon_json(recipient_id):
