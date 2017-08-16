@@ -51,9 +51,15 @@ def postback_control(messaging_event, sender_id):
             upload_flag(6, sender_id)
             json_message(sender_id, "點選傳送訊息，輸入想說的話或圖片，本汪就會幫你寄過去的呦")
     elif messaging_event["postback"]["payload"] == 'main_button7':
-        upload_flag(7, sender_id)
-        json_message(sender_id, "若刪除明信片好友，未來將無法與該位好友取得聯繫")
-        json_del_friend(sender_id)
+        '''
+        還需新增一個狀況 若沒使用過交換明信片的功能，就點擊刪除好友，會有bug
+        '''
+        if get_reci_id(sender_id) == 'None':
+            json_message(sender_id, "目前無可刪除的明信片好友")
+        else:
+            upload_flag(7, sender_id)
+            json_message(sender_id, "若刪除明信片好友，未來將無法與該位好友取得聯繫")
+            json_del_friend(sender_id)
     elif messaging_event['postback']['payload'] == 'get_match_mail':
         user_mail = get_mail(sender_id)
         friend_mail = get_mail(user_mail['match_id'])
