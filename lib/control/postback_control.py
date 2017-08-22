@@ -14,9 +14,9 @@ def postback_control(messaging_event, sender_id):
     if messaging_event["postback"]["payload"] == 'GET_STARTED_PAYLOAD':
         upload_flag(0, sender_id)
         json_message(sender_id, "汪汪，我是聊天機器狗～～我會做很多事喔")
-        json_message(sender_id, "聊天：可以問我寵物問題，我會給你解答的～")
+        json_message(sender_id, "寵物顧問：可以問我寵物問題，我會給你解答的～")
         json_message(sender_id, "交換明信片：用明信片來認識愛寵物的新朋友吧～")
-        json_message(sender_id, "可愛寵物影片推播：幫你找可愛的寵物影片")
+        json_message(sender_id, "寵物影片推播：幫你找可愛的寵物影片")
         json_message(sender_id, "領養資訊搜尋：找收容所的領養資訊")
         json_message(sender_id, "送養資訊搜尋：找民間送養的資訊")
         json_mainbutton(sender_id)
@@ -50,7 +50,7 @@ def postback_control(messaging_event, sender_id):
             json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換新明信片')
         else:
             upload_flag(6, sender_id)
-            json_message(sender_id, "點選傳送訊息，輸入想說的話或圖片，本汪就會幫你寄過去的呦")
+            json_message(sender_id, "返回功能表上一頁，點選傳送訊息，輸入想說的話或圖片，本汪就會幫你寄過去的呦")
     elif messaging_event["postback"]["payload"] == 'main_button7':
         '''
         還需新增一個狀況 若沒使用過交換明信片的功能，就點擊刪除好友，會有bug
@@ -74,11 +74,11 @@ def postback_control(messaging_event, sender_id):
         json_ask_reply_mail(sender_id)
     elif messaging_event['postback']['payload'] == 'subscription_yes':
         deal_subscription(sender_id, 1)
-        json_message(sender_id, "訂閱完成")
+        json_message(sender_id, "訂閱完成，固定推播寵物影片時間為每晚八點")
     elif messaging_event['postback']['payload'] == 'subscription_no':
         deal_subscription(sender_id, 0)
         json_message(
-            sender_id, "好的，若未來有需要訂閱，點選\n工作列->\n可愛動物影片推播->\n訂閱功能")
+            sender_id, "好的，若未來有需要訂閱，點選功能表->\n寵物影片/領養資訊\n影片訂閱/取消訂閱")
     # elif messaging_event['postback']['payload'] == 'reply_yes':
     #     json_message(
     #         sender_id, "未來只要點選\n功能表-->\n與明信片朋友聊天\n就可以傳送訊息給明信片朋友喔")
@@ -93,7 +93,7 @@ def postback_control(messaging_event, sender_id):
 
     elif messaging_event['postback']['payload'] == 'del_yes':
         del_friend(sender_id)
-        json_message(sender_id, "已刪除，若想交換新明信片認識好友，請再點選\n功能->交換新明信片")
+        json_message(sender_id, "已刪除，若想交換新明信片認識好友，請再點選\n功能表->交換明信片->交換明信片")
     elif messaging_event['postback']['payload'] == 'del_no':
         del_friend(sender_id)
-        json_message(sender_id, "好的，若未來想刪除，請再點選\n功能表->刪除明信片好友")
+        json_message(sender_id, "好的，若未來想刪除，請再點選功能表->\n刪除明信片好友")
