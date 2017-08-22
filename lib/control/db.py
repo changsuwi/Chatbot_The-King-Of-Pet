@@ -3,7 +3,7 @@
 
 import pymongo
 import random
-from ..json_fb import json_match, json_message
+from ..json_fb import json_message, json_photo
 #  Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 
 uri = 'mongodb://vic010744:vic32823@ds135700.mlab.com:35700/heroku_4w25h5pt'
@@ -49,10 +49,9 @@ def upload_db_photo_url(url, sender_id):
     else:
         target_id = get_reci_id(sender_id)
         if target_id is not 'None':
-            query = {'ID': target_id}
             json_message(target_id, '不好意思，您的明信片好友已離開，若需要交換新明信片，請點選功能表內的交換新明信片')
-            Postcard.update(
-                query, {'$set': {'match_id': 'None', 'match': '-1'}})
+            Postcard.update({'ID': target_id},
+                            {'$set': {'match_id': 'None', 'match': '-1'}})
         Postcard.update(query, {
             '$set': {'url': url, 'match': '0', 'match_id': 'None'}})
 
@@ -63,6 +62,21 @@ def upload_db_intro(text, sender_id):
     Postcard.update(
         query, {'$set': {'intro': text}})
     client.close()
+
+
+def json_match(recipient_id):
+    upload_flag(6, recipient_id)
+    json_message(recipient_id, '本汪咬到一封明信片，內容如下')
+    user_mail = get_mail(recipient_id)
+    friend_mail = get_mail(user_mail['match_id'])
+    intro = friend_mail['intro']
+    img_url = friend_mail['url']
+    json_photo(recipient_id, img_url)
+    json_message(recipient_id, intro.encode('utf-8'))
+    json_message(
+        recipient_id, "現在只要傳送訊息，都會傳送到對方那喔")
+    json_message(
+        recipient_id, "若不想與對方聊天了，點開功能表->刪除明信片好友即可")
 
 
 def match(sender_id):
