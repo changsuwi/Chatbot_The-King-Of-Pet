@@ -5,7 +5,8 @@ from ..json_fb import json_subscription, json_ask_reply_mail, json_del_friend
 from adopt.search1 import json_location
 from adopt.search2 import json_choosedogcat2
 from video import deal_video
-from db import upload_flag, get_mail, get_video, first_use, deal_subscription
+from db import upload_flag, get_mail
+from db import deal_subscription, get_video, first_use
 from db import del_friend, get_reci_id
 
 
@@ -60,6 +61,9 @@ def postback_control(messaging_event, sender_id):
             upload_flag(7, sender_id)
             json_message(sender_id, "若刪除明信片好友，未來將無法與該位好友取得聯繫")
             json_del_friend(sender_id)
+    elif messaging_event["postback"]["payload"] == 'main_button8':
+        json_subscription(sender_id)
+
     elif messaging_event['postback']['payload'] == 'get_match_mail':
         user_mail = get_mail(sender_id)
         friend_mail = get_mail(user_mail['match_id'])
