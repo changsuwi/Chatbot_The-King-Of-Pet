@@ -63,7 +63,6 @@ def postback_control(messaging_event, sender_id):
             json_del_friend(sender_id)
     elif messaging_event["postback"]["payload"] == 'main_button8':
         json_subscription(sender_id)
-
     elif messaging_event['postback']['payload'] == 'get_match_mail':
         user_mail = get_mail(sender_id)
         friend_mail = get_mail(user_mail['match_id'])
