@@ -64,6 +64,14 @@ def upload_db_intro(text, sender_id):
     client.close()
 
 
+def upload_db_nickname(text, sender_id):
+    Postcard = db['postcard']
+    query = {'ID': sender_id}
+    Postcard.update(
+        query, {'$set': {'nickname': text}})
+    client.close()
+
+
 def json_match(recipient_id):
     upload_flag(6, recipient_id)
     json_message(recipient_id, '本汪咬到一封明信片，內容如下')

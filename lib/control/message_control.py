@@ -7,8 +7,8 @@ from adopt.adopt import crawler, crawler2
 from adopt.search1 import json_city, json_searchdogcat, json_searchbodytype
 from adopt.search1 import json_location
 from adopt.search2 import json_location2, json_city2, json_choosedogcat2
-from db import upload_db_photo_url, upload_db_intro, match, get_video
-from db import get_flag, get_reci_id, upload_flag, first_use
+from db import upload_db_photo_url, upload_db_intro, upload_db_nickname, match
+from db import get_flag, get_reci_id, upload_flag, first_use, get_video
 from video import deal_video
 from imgur import upload_photo
 
@@ -23,10 +23,10 @@ def message_control(messaging_event, sender_id):
             json_message(
                 sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
         elif message_text == u'交換新明信片':
-            upload_flag(2, sender_id)
+            upload_flag(20, sender_id)
             json_message(
                 sender_id, "這是交換寵物明信片的小遊戲，藉由本汪這個郵差，讓您可以藉由明信片認識愛寵物的新朋友")
-            json_message(sender_id, "點擊傳送訊息，然後傳送一張照片")
+            json_message(sender_id, "返回上一頁，點擊傳送訊息，然後傳送一張照片")
         elif message_text == u'可愛寵物影片推播':
             upload_flag(3, sender_id)
             videos = get_video()
@@ -41,8 +41,12 @@ def message_control(messaging_event, sender_id):
             json_choosedogcat2(sender_id)
         elif(get_flag(sender_id) == 1):
             chat(sender_id, message_text)
-        elif(get_flag(sender_id) == 2):
+        elif(get_flag(sender_id) == 21):
+            upload_flag(22, sender_id)
             upload_db_intro(message_text, sender_id)
+            json_message(sender_id, "已收到，請輸入暱稱")
+        elif(get_flag(sender_id) == 22):
+            upload_db_nickname(message_text, sender_id)
             json_message(sender_id, "已完成，請耐心等待神秘的明信片")
             match(sender_id)
         elif(get_flag(sender_id) == 4 or
@@ -83,18 +87,19 @@ def message_control(messaging_event, sender_id):
         elif get_flag(sender_id) == 6:
             reci_id = get_reci_id(sender_id)
             if reci_id == 'None':
-                json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換心明信片')
+                json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換新明信片')
             elif get_flag(reci_id) == 6:
                 json_message(reci_id, message_text.encode('utf-8'))
             else:
                 message_text = message_text + '\nby postcard'
                 json_message(reci_id, message_text.encode('utf-8'))
     elif "attachments" in messaging_event["message"]:
-        if get_flag(sender_id) == 2:
+        if get_flag(sender_id) == 20:
             for attachment in messaging_event["message"]["attachments"]:
                 url = attachment["payload"]["url"]
             url = upload_photo(url)
             upload_db_photo_url(url, sender_id)
+            upload_flag(21, sender_id)
             json_message(sender_id, "已收到圖片")
             json_message(sender_id, "請輸入簡單的明信片內容，給未知的寵物愛好者吧\n 例如")
             json_message(sender_id, "這是我家的可愛小狗，叫作蛋黃，他的尾巴超可愛的 對吧~")
