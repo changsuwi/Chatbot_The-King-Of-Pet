@@ -8,7 +8,8 @@ from adopt.search1 import json_city, json_searchdogcat, json_searchbodytype
 from adopt.search1 import json_location
 from adopt.search2 import json_location2, json_city2, json_choosedogcat2
 from db import upload_db_photo_url, upload_db_intro, upload_db_nickname, match
-from db import get_flag, get_reci_id, upload_flag, first_use, get_video
+from db import get_flag, get_reci_id, get_nickname
+from db import upload_flag, first_use, get_video
 from video import deal_video
 from imgur import upload_photo
 
@@ -85,15 +86,16 @@ def message_control(messaging_event, sender_id):
                 searchlist = messaging_event[
                     "message"]["quick_reply"]["payload"]
                 crawler(sender_id, searchlist)
+
         elif get_flag(sender_id) == 6:
             reci_id = get_reci_id(sender_id)
             if reci_id == 'None':
                 json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換新明信片')
-            elif get_flag(reci_id) == 6:
-                json_message(reci_id, message_text.encode('utf-8'))
             else:
-                message_text = message_text + '\nby postcard'
+                nickname = get_nickname(sender_id)
+                message_text = nickname + ':' + message_text
                 json_message(reci_id, message_text.encode('utf-8'))
+
     elif "attachments" in messaging_event["message"]:
         if get_flag(sender_id) == 20:
             for attachment in messaging_event["message"]["attachments"]:
