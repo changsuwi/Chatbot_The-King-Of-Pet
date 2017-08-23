@@ -48,6 +48,7 @@ def message_control(messaging_event, sender_id):
         elif(get_flag(sender_id) == 22):
             upload_db_nickname(message_text, sender_id)
             json_message(sender_id, "已完成，請耐心等待神秘的明信片")
+            upload_flag(0, sender_id)
             match(sender_id)
         elif(get_flag(sender_id) == 4 or
              get_flag(sender_id) == 5):

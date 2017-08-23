@@ -36,7 +36,7 @@ def postback_control(messaging_event, sender_id):
     # Exchange new postcard
 
     elif messaging_event["postback"]["payload"] == 'main_button2':
-        upload_flag(2, sender_id)
+        upload_flag(20, sender_id)
         json_message(sender_id, "這是交換寵物明信片的小遊戲，藉由本汪這個郵差，讓您可以藉由明信片認識愛寵物的新朋友")
         json_message(sender_id, "返回上一頁，點擊傳送訊息，然後傳送一張照片")
 
