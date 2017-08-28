@@ -84,7 +84,7 @@ def json_match(recipient_id, sender_nickname):
         sender=sender_nickname))
     user_mail = get_mail(recipient_id)
     friend_mail = get_mail(user_mail['match_id'])
-    intro = friend_mail['intro']
+    intro = sender_nickname + ':' + '\n' + friend_mail['intro']
     img_url = friend_mail['url']
     json_photo(recipient_id, img_url)
     json_message(recipient_id, intro.encode('utf-8'))
