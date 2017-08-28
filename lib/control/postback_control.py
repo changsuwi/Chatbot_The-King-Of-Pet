@@ -67,7 +67,7 @@ def postback_control(messaging_event, sender_id):
 
     elif messaging_event['postback']['payload'] == 'del_yes':
         del_friend(sender_id)
-        json_message(sender_id, "已刪除，若想交換新明信片認識好友，請再點選\n功能表->交換明信片->交換明信片")
+        json_message(sender_id, "已刪除，若想交換新明信片認識好友，請再點選\n功能表->交換明信片->交換新明信片")
 
     # del friend false
 
