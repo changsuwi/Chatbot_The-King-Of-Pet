@@ -78,9 +78,10 @@ def get_nickname(sender_id):
     return dat['nickname']
 
 
-def json_match(recipient_id):
+def json_match(recipient_id, sender_nickname):
     upload_flag(6, recipient_id)
-    json_message(recipient_id, '本汪咬到一封明信片，內容如下')
+    json_message(recipient_id, '本汪咬到一封明信片\n寄信人：{sender}\n內容如下'.format(
+        sender=sender_nickname))
     user_mail = get_mail(recipient_id)
     friend_mail = get_mail(user_mail['match_id'])
     intro = friend_mail['intro']
@@ -90,7 +91,7 @@ def json_match(recipient_id):
     json_message(
         recipient_id, "現在只要傳送訊息，都會傳送到對方那喔")
     json_message(
-        recipient_id, "若不想與對方聊天了，點開功能表->刪除明信片好友即可")
+        recipient_id, "若不想與對方聊天了\n點開功能表->\n交換明信片->\n刪除明信片好友即可")
 
 
 def match(sender_id):
@@ -102,12 +103,14 @@ def match(sender_id):
             Postcard.update(
                 query, {'$set':
                         {'match': '1', 'match_id': sender_id}})
-            json_match(item['ID'])
             query = {'ID': sender_id}
+            sender_data = Postcard.find_one(query)
+            sender_nickname = sender_data['nickname']
             Postcard.update(
                 query, {'$set':
                         {'match': '1', 'match_id': item['ID']}})
-            json_match(sender_id)
+            json_match(item['ID'], sender_nickname)
+            json_match(sender_id, item['nickname'])
 
 
 def get_mail(sender_id):
