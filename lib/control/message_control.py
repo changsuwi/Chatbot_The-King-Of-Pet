@@ -93,7 +93,7 @@ def message_control(messaging_event, sender_id):
                 json_message(sender_id, '目前沒有配對到的好友喔，若要交朋友，請按功能表的交換新明信片')
             else:
                 nickname = get_nickname(sender_id)
-                message_text = nickname + '：' + message_text
+                message_text = nickname + '：'.encode('utf-8') + message_text
                 json_message(reci_id, message_text.encode('utf-8'))
 
     elif "attachments" in messaging_event["message"]:
