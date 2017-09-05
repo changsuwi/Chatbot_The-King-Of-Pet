@@ -112,9 +112,6 @@ def message_control(messaging_event, sender_id):
                 url = attachment["payload"]["url"]
             url = upload_photo(url)
             reci_id = get_reci_id(sender_id)
-            if get_flag(reci_id) == 6:
-                json_photo(reci_id, url)
-            else:
-                json_photo(reci_id, url)
-                message_text = 'by postcard'
-                json_message(reci_id, message_text.encode('utf-8'))
+            reci_nickname = get_nickname(reci_id)
+            json_message(reci_id, reci_nickname + '：'.decode('utf-8'))
+            json_photo(reci_id, url)
