@@ -112,6 +112,6 @@ def message_control(messaging_event, sender_id):
                 url = attachment["payload"]["url"]
             url = upload_photo(url)
             reci_id = get_reci_id(sender_id)
-            reci_nickname = get_nickname(reci_id)
-            json_message(reci_id, (reci_nickname + '：'.decode('utf-8')).encode('utf-8'))
+            nickname = get_nickname(sender_id)
+            json_message(reci_id, (nickname + '：'.decode('utf-8')).encode('utf-8'))
             json_photo(reci_id, url)
