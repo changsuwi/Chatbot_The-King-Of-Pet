@@ -29,7 +29,7 @@ def crawler(sender_id, searchlist):
         shelter = item.select(".shelters")[0].text.encode("utf-8")
         item_url_desktop = item.select("a")[0].get('href')
         id_num_in_str = item_url_desktop.find('id')
-        item_id = item_url_desktop[id_num_in_str + 3: id_num_in_str + 7]
+        item_id = item_url_desktop[id_num_in_str + 3: id_num_in_str + 8]
         item_url = 'http://animal-adoption.coa.gov.tw/index.php/mobile/index/animal_info/?id=' + item_id
         image_url = item.select("img")[0].get('data-original')
         # find new imformation,so add this in the template
