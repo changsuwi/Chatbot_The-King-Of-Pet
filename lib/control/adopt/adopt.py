@@ -17,9 +17,10 @@ def crawler(sender_id, searchlist):
     search = searchlist.split()
     print search
     template = json_template(sender_id)
+    url = "http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(
+        area=search[0].encode('utf-8'), kind=search[1].encode('utf-8'), bodytype=search[2])
     # start to crawler
-    res = requests.get("http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(
-        area=search[0].encode('utf-8'), kind=search[1].encode('utf-8'), bodytype=search[2]))
+    res = requests.get(url)
     soup = BeautifulSoup(res.text, "lxml")
     count = 0  # count the number of animal
     for item in soup.select(".an"):
@@ -42,6 +43,7 @@ def crawler(sender_id, searchlist):
         json_mainbutton(sender_id)
 
     else:  # finish the crawler and send data to json_template
+        template = add_gotoweb(template, url)
         data = json.dumps(template)
         sendtofb(data)
         json_message(sender_id, "找到了，我很厲害吧，給我骨頭嘛(搖尾)")
@@ -59,6 +61,22 @@ def add_template(template, city, gender, shelter, item_url, image_url):
                     "type": "web_url",
                     "url": item_url,
                     "title": "View Website"
+                }
+            ]
+    }
+    template["message"]["attachment"]["payload"]["elements"].append(bobble)
+    return template
+
+
+def add_gotoweb(template, url):
+    bobble = {
+        "title": "到網站看更多",
+        "buttons":
+            [
+                {
+                    "type": "web_url",
+                    "url": url,
+                    "title": "前往網站"
                 }
             ]
     }
