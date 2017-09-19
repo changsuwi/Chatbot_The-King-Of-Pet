@@ -17,7 +17,9 @@ def crawler(sender_id, searchlist):
     search = searchlist.split()
     print search
     template = json_template(sender_id)
-    url = "http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=CHILD&s_color=ALL&s_sex=F".format(
+    url = "http://animal-adoption.coa.gov.tw/index.php/animal?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&num=8&s_color=ALL&s_sex=ALL".format(
+        area=search[0].encode('utf-8'), kind=search[1].encode('utf-8'), bodytype=search[2])
+    url_mobile = "http://animal-adoption.coa.gov.tw/index.php/mobile?s_area={area}&s_kind={kind}&s_bodytype={bodytype}&s_age=ALL&s_color=ALL&s_sex=ALL".format(
         area=search[0].encode('utf-8'), kind=search[1].encode('utf-8'), bodytype=search[2])
     # start to crawler
     res = requests.get(url)
@@ -43,7 +45,7 @@ def crawler(sender_id, searchlist):
         json_mainbutton(sender_id)
 
     else:  # finish the crawler and send data to json_template
-        template = add_gotoweb(template, url)
+        template = add_gotoweb(template, url_mobile)
         data = json.dumps(template)
         sendtofb(data)
         json_message(sender_id, "找到了，我很厲害吧，給我骨頭嘛(搖尾)")
