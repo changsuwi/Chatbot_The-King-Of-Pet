@@ -62,5 +62,18 @@ def chat(sender_id,message_text):
     
     elif(u"狗" in message_text and  u"訓練" in message_text):
         json_message(sender_id,"我在網路上找到狗狗訓練教學\nhttps://petbird.tw/article5161.html")
+
+    elif(u"狗" in message_text and  u"洗澡" in message_text):
+        json_message(sender_id,"我在網路上找到狗狗洗澡知識\nhttps://petbird.tw/article843.html")
+    
+    elif(u"貓" in message_text and  u"洗澡" in message_text):
+        json_message(sender_id,"我在網路上找到貓咪洗澡知識\nhttps://www.petsmao.com/post/5654")
+    
+    elif(u"貓" in message_text and (u"喝水" in message_text or u'飲水' in message_text)):
+        json_message(sender_id,"我在網路上找到有關貓咪喝水知識\nhttps://www.petsmao.com/post/5763")
+    elif(u"貓" in message_text and u'貓砂盆' in message_text):
+        json_message(sender_id,"我在網路上找到有關貓砂盆知識\nhttps://www.petsmao.com/post/5755")
+    elif(u"貓" in message_text and u'貓砂' in message_text):
+        json_message(sender_id,"我在網路上找到有關貓砂知識\nhttps://www.petsmao.com/post/5665")
     else:
         json_message(sender_id,"嗚嗚不好意思，我不太懂您在說什麼哩")
