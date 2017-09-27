@@ -56,5 +56,11 @@ def chat(sender_id,message_text):
     
     elif(u"貓" in message_text and u"斜眼" in message_text ):
         json_message(sender_id,"斜眼看著主人\n斜眼表示貓咪對主人很滿意，可能是食物很好吃或是環境很舒服等，都是貓咪感到開心的時候。")
+    
+    elif(u"狗" in message_text and ((u"不能" in message_text or u"不行" in message_text) and (u"吃" in message_text or u"食" in message_text)) or (u"可以" in message_text and (u"吃" in message_text or u"牛奶" in message_text or u"巧克力" in message_text) and u"嗎" in message_text) ):
+        json_message(sender_id,"狗狗不能吃巧克力\n菇類\n葡萄或葡萄乾\n糖分過高的食物等等\n ")
+    
+    elif(u"狗" in message_text and  u"訓練" in message_text):
+        json_message(sender_id,"我在網路上找到狗狗訓練教學\nhttps://petbird.tw/article5161.html")
     else:
         json_message(sender_id,"嗚嗚不好意思，我不太懂您在說什麼哩")
