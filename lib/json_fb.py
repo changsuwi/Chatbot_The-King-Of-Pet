@@ -80,6 +80,45 @@ def json_mainbutton(recipient_id):
     sendtofb(data)
 
 
+def json_chat_quickreply(recipient_id):
+    log("sending chat_quickreply to {recipient}".format(
+        recipient=recipient_id))
+    data = json.dumps(
+        {
+            "recipient":
+            {
+                "id": recipient_id
+            },
+            "message":
+            {
+                "quick_replies": [
+                    {
+                        "content_type": "text",
+                        "title": "領養寵物的條件?"
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "貓可以喝牛奶嗎?"
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "貓咪怎麼洗澡?"
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "狗狗怎麼洗澡"
+                    },
+                    {
+                        "content_type": "text",
+                        "title": "貓咪吐了怎麼辦?"
+                    }
+                ]
+            }
+        }
+    )
+    sendtofb(data)
+
+
 def json_photo(recipient_id, url):
     log("sending photo to {recipient}".format(recipient=recipient_id))
     data = json.dumps({
@@ -143,6 +182,7 @@ def json_subscription(recipient_id):
         }
     })
     sendtofb(data)
+
 
 '''
 def json_match(recipient_id):
