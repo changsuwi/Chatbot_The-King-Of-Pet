@@ -87,5 +87,5 @@ def chat(sender_id, message_text):
         json_message(
             sender_id, "我在網路上找到有關貓砂知識\nhttps://www.petsmao.com/post/5665")
     else:
-        json_message(sender_id, "嗚嗚不好意思，我不太懂您在說什麼哩!不過我懂其他有關的寵物知識，例如")
+        json_message(sender_id, "嗚嗚不好意思，我不太懂您在說什麼哩!")
         json_chat_quickreply(sender_id)

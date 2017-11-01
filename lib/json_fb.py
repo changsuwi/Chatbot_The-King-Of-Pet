@@ -91,6 +91,7 @@ def json_chat_quickreply(recipient_id):
             },
             "message":
             {
+                "text": "不過我懂其他有關的寵物知識，例如",
                 "quick_replies": [
                     {
                         "content_type": "text",
