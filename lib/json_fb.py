@@ -94,23 +94,28 @@ def json_chat_quickreply(recipient_id):
                 "quick_replies": [
                     {
                         "content_type": "text",
-                        "title": "領養寵物的條件?"
+                        "title": "領養寵物的條件?",
+                        "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "貓可以喝牛奶嗎?"
+                        "title": "貓可以喝牛奶嗎?",
+                        "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "貓咪怎麼洗澡?"
+                        "title": "貓咪怎麼洗澡?",
+                        "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "狗狗怎麼洗澡"
+                        "title": "狗狗怎麼洗澡",
+                        "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "貓咪吐了怎麼辦?"
+                        "title": "貓咪吐了怎麼辦?",
+                        "payload": "2"
                     }
                 ]
             }
