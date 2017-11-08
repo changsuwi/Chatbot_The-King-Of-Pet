@@ -99,27 +99,27 @@ def json_chat_quickreply(recipient_id):
                 "quick_replies": [
                     {
                         "content_type": "text",
-                        "title": titles[0].encode("UTF-8"),
+                        "title": titles[0],
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": titles[1].encode("UTF-8"),
+                        "title": titles[1],
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": titles[2].encode("UTF-8"),
+                        "title": titles[2],
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": titles[3].encode("UTF-8"),
+                        "title": titles[3],
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": titles[4].encode("UTF-8"),
+                        "title": titles[4],
                         "payload": "2"
                     }
                 ]
