@@ -7,6 +7,7 @@ json_fb 此模組主要存放通用的json格式與打包
 """
 from sendtofb_log import sendtofb, log
 import json
+import random
 
 
 def typingon_json(recipient_id):
@@ -83,6 +84,9 @@ def json_mainbutton(recipient_id):
 def json_chat_quickreply(recipient_id):
     log("sending chat_quickreply to {recipient}".format(
         recipient=recipient_id))
+    titles = ['領養寵物的條件?', '貓可以喝牛奶嗎?', '貓咪怎麼洗澡?',
+              '狗狗怎麼洗澡', '貓咪吐了怎麼辦?', '要如何照顧剛出生的貓？']
+    random.shuffle(titles)
     data = json.dumps(
         {
             "recipient":
@@ -95,27 +99,27 @@ def json_chat_quickreply(recipient_id):
                 "quick_replies": [
                     {
                         "content_type": "text",
-                        "title": "領養寵物的條件?",
+                        "title": titles[0].encode("UTF-8"),
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "貓可以喝牛奶嗎?",
+                        "title": titles[1].encode("UTF-8"),
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "貓咪怎麼洗澡?",
+                        "title": titles[2].encode("UTF-8"),
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "狗狗怎麼洗澡",
+                        "title": titles[3].encode("UTF-8"),
                         "payload": "2"
                     },
                     {
                         "content_type": "text",
-                        "title": "貓咪吐了怎麼辦?",
+                        "title": titles[4].encode("UTF-8"),
                         "payload": "2"
                     }
                 ]
