@@ -54,7 +54,7 @@ def chat(sender_id, message_text):
         json_message(
             sender_id, "當發現貓咪的屁股來回擺動時，是牠要給自己一個適合的攻擊角度，尤其家裡養兩隻以上的貓咪時，會發現當牠們正準備為食物打鬥時，不會直接扭打起來，而是先擺動自己的屁股。")
 
-    elif(u"貓" in message_text and u"屁" in message_text and u"對著" in message_text and (u"抬" in message_text or u"翹" in message_text)):
+    elif(u"貓" in message_text and u"屁" in message_text and u"對著" in message_text):
         json_message(
             sender_id, "這是常見的動作，當你蹲下身想看看牠時，牠卻抬起屁股對著你或是在睡覺時牠爬上床用屁股對著你，這些都不是惡意，是貓咪打招呼和示好的方式，表示信任希望你記住牠的味道。")
 
