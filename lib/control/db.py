@@ -81,7 +81,7 @@ def get_nickname(sender_id):
 def json_match(recipient_id, sender_nickname):
     upload_flag(6, recipient_id)
     json_message(recipient_id, '本汪咬到一封明信片\n寄信人：{sender}\n內容如下'.format(
-        sender=sender_nickname))
+        sender=sender_nickname.encode('UTF-8')))
     user_mail = get_mail(recipient_id)
     friend_mail = get_mail(user_mail['match_id'])
     intro = sender_nickname + ':' + '\n' + friend_mail['intro']
