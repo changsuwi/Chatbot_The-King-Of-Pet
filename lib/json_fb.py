@@ -51,7 +51,7 @@ def json_mainbutton(recipient_id):
                 "quick_replies": [
                     {
                         "content_type": "text",
-                        "title": "聊天",
+                        "title": "寵物顧問",
                         "payload": "main_button1"
                     },
                     {
