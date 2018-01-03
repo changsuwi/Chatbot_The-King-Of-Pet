@@ -19,11 +19,11 @@ def message_control(messaging_event, sender_id):
         message_text = messaging_event["message"][
             "text"]  # the message's text
         print(sender_id)  # test
-        if message_text == u'聊天':
+        if message_text == u'寵物顧問':
             upload_flag(1, sender_id)
             json_message(
                 sender_id, "我懂很多寵物知識喔\n你可以問我有關寵物領養 寵物健康 寵物食品的各種問題~")
-        elif message_text == u'交換新明信片':
+        elif message_text == u'交換明信片':
             upload_flag(20, sender_id)
             json_message(
                 sender_id, "這是交換寵物明信片的小遊戲，藉由本汪這個郵差，讓您可以藉由明信片認識愛寵物的新朋友")
